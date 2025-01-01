@@ -1,16 +1,39 @@
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
-import Herosection from "./components/Herosection";
+import HeroSection from "./components/Herosection";
 import NewArrivals from "./components/NewArrivals";
+import Women from "./components/Womens";
+import Men from "./components/Mens";
 import Footer from "./components/Footer";
 
-export default function App() {
+const App: React.FC = () => {
+  const location = useLocation();
+
   return (
     <div>
       <Header />
-      <Herosection/>
-      <NewArrivals/>
-      <Footer/>
+
       
+
+      <Routes>
+        {/* Define all routes here */}
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/new-arrivals" element={<NewArrivals />} />
+        <Route path="/category/womens" element={<Women />} />
+        <Route path="/category/Mens" element={<Men />} />
+      </Routes>
+       {/* Conditionally render New Arrivals only on the Home page */}
+      {location.pathname === "/" && <NewArrivals />}
+      <Footer />
     </div>
   );
-}
+};
+
+// Wrap App in Router to provide routing context
+const WrappedApp: React.FC = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default WrappedApp;
