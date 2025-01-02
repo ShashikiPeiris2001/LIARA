@@ -4,6 +4,8 @@ import HeroSection from "./components/Herosection";
 import NewArrivals from "./components/NewArrivals";
 import Women from "./components/Womens";
 import Men from "./components/Mens";
+import Kids from "./components/Kids";
+import Sale from "./components/Sales";
 import Footer from "./components/Footer";
 
 const App: React.FC = () => {
@@ -13,14 +15,14 @@ const App: React.FC = () => {
     <div>
       <Header />
 
-      
-
       <Routes>
         {/* Define all routes here */}
         <Route path="/" element={<HeroSection />} />
         <Route path="/new-arrivals" element={<NewArrivals />} />
         <Route path="/category/womens" element={<Women />} />
         <Route path="/category/Mens" element={<Men />} />
+        <Route path="/category/Kids" element={<Kids />} />
+        <Route path="/Sales" element={<Sale />} />
       </Routes>
        {/* Conditionally render New Arrivals only on the Home page */}
       {location.pathname === "/" && <NewArrivals />}

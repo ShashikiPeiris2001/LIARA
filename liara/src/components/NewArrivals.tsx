@@ -42,7 +42,7 @@ const NewArrivals: React.FC = () => {
       </div>
       <div className="flex justify-center mt-8">
         <button
-          className="px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition"
+          className="text-sm py-3 px-8 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition"
           onClick={() => window.location.href = "/products"} // Navigate to All Products Page
         >
           View All Products
