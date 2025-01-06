@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
+import Navbar from "./components/NavBar";
 import HeroSection from "./components/Herosection";
 import NewArrivals from "./components/NewArrivals";
 import Women from "./components/Womens";
@@ -14,6 +15,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
+      <Navbar />
 
       <Routes>
         {/* Define all routes here */}

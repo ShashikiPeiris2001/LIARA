@@ -1,5 +1,6 @@
 import React from "react";
-import image from "../assets/image.png"; // Import the image as a module
+import image from "../assets/Everlane denim banner.jpg"; // Import the image as a module
+import Navbar from "./NavBar";
 
 const HeroSection: React.FC = () => {
   return (
