@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import Navbar from "./NavBar";
 
 const Men = () => {
   // Sample data for products

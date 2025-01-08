@@ -19,11 +19,11 @@ const App: React.FC = () => {
 
       <Routes>
         {/* Define all routes here */}
-        <Route path="/" element={<HeroSection />} />
-        <Route path="/new-arrivals" element={<NewArrivals />} />
-        <Route path="/category/womens" element={<Women />} />
-        <Route path="/category/Mens" element={<Men />} />
-        <Route path="/category/Kids" element={<Kids />} />
+        <Route path="/Herosection" element={<HeroSection />} />
+        <Route path="/NewArrivals" element={<NewArrivals />} />
+        <Route path="/Womens" element={<Women />} />
+        <Route path="/Mens" element={<Men />} />
+        <Route path="/Kids" element={<Kids />} />
         <Route path="/Sales" element={<Sale />} />
       </Routes>
        {/* Conditionally render New Arrivals only on the Home page */}
