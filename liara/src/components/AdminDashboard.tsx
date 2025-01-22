@@ -45,13 +45,7 @@ const AdminDashboard: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-100">
-        {/* Header */}
-        <header className="bg-gray-300 p-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">LIARA</h1>
-          <div className="text-xl cursor-pointer">
-            <i className="fas fa-user-circle"></i>
-          </div>
-        </header>
+        
 
         <div className="p-6">
           {/* Dashboard Summary */}

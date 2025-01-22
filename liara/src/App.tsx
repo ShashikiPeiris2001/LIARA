@@ -8,14 +8,22 @@ import Men from "./components/Mens";
 import Kids from "./components/Kids";
 import Sale from "./components/Sales";
 import Footer from "./components/Footer";
+import AdminDashboard from "./components/AdminDashboard";
 
 const App: React.FC = () => {
   const location = useLocation();
 
+  // Check if the current route is for AdminDashboard
+  const isAdminRoute = location.pathname === "/AdminDashboard";
+
   return (
     <div>
+      {/* Always show the Header */}
       <Header />
-      <Navbar />
+
+      {/* Conditionally render Navbar and Footer */}
+      {!isAdminRoute && <Navbar />}
+      {location.pathname === "/" && <HeroSection />}
 
       <Routes>
         {/* Define all routes here */}
@@ -25,10 +33,14 @@ const App: React.FC = () => {
         <Route path="/Mens" element={<Men />} />
         <Route path="/Kids" element={<Kids />} />
         <Route path="/Sales" element={<Sale />} />
+        <Route path="/AdminDashboard" element={<AdminDashboard />} />
       </Routes>
-       {/* Conditionally render New Arrivals only on the Home page */}
-      {location.pathname === "/" && <NewArrivals />}
-      <Footer />
+
+      {/* Show NewArrivals only on the Home page */}
+      {!isAdminRoute && location.pathname === "/" && <NewArrivals />}
+
+      {/* Show Footer only if not on AdminDashboard */}
+      {!isAdminRoute && <Footer />}
     </div>
   );
 };
