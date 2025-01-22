@@ -5,7 +5,7 @@ import { IoMdContact } from "react-icons/io";
 
 const Header: React.FC = () => {
   return (
-    <header className="flex justify-between items-center px-8 py-5 bg-white ">
+    <header className="flex justify-between items-center px-8 py-4 bg-white ">
       {/* Logo Section */}
       <div className="font-serif text-4xl font-medium">
         LIARA
