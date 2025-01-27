@@ -16,18 +16,26 @@ namespace YourNamespace.Controllers
         }
 
         // GET: api/Products
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<IEnumerable<product>>> GetProducts()
         {
             return await _context.Products.Include(p => p.Category).ToListAsync();
+        }*/
+
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<product>>> GetProducts()
+        {
+            return await _context.Products.ToListAsync();
         }
+
 
         // POST: api/Products
         [HttpPost]
         public async Task<ActionResult<product>> PostProduct(product product)
         {
             // Ensure the category exists
-            var category = await _context.Category.FindAsync(product.CategoryId);
+            var category = await _context.Category.FindAsync(product.CategoryId);  
             if (category == null)
             {
                 return BadRequest("Invalid CategoryId");

@@ -13,6 +13,6 @@ namespace WebApplication1.Models
         public string Sub_Category { get; set; }
 
         // Navigation property to Products
-        public ICollection<product>? Products { get; set; }
+        //public ICollection<product>? Products { get; set; }
     }
 }

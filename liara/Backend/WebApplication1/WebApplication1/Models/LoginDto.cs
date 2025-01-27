@@ -1,6 +1,6 @@
 ﻿namespace WebApplication1.Models
 {
-    public class AddUsersDto
+    public class LoginDto
     {
         public string Username { get; set; }
         public string Email { get; set; }

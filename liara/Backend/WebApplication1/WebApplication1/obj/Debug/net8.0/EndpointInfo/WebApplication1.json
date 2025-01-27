@@ -183,7 +183,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Users/register-users": {
       "post": {
         "tags": [
           "Users"
@@ -192,17 +194,65 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddUsersDto"
+                "$ref": "#/components/schemas/User"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddUsersDto"
+                "$ref": "#/components/schemas/User"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddUsersDto"
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
               }
             }
           }
@@ -256,7 +306,29 @@
   },
   "components": {
     "schemas": {
-      "AddUsersDto": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "category_Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_Category": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginDto": {
         "type": "object",
         "properties": {
           "username": {
@@ -278,30 +350,27 @@
         },
         "additionalProperties": false
       },
-      "Category": {
+      "User": {
         "type": "object",
         "properties": {
-          "categoryId": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
-          "categoryName": {
+          "username": {
             "type": "string",
             "nullable": true
           },
-          "category_Description": {
+          "email": {
             "type": "string",
             "nullable": true
           },
-          "sub_Category": {
+          "passwordHash": {
             "type": "string",
             "nullable": true
           },
-          "products": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/product"
-            },
+          "userRole": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -335,7 +404,8 @@
         "properties": {
           "product_id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "product_name": {
             "type": "string",
@@ -343,11 +413,13 @@
           },
           "price": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "stock": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "description": {
             "type": "string",
@@ -359,10 +431,8 @@
           },
           "categoryId": {
             "type": "integer",
-            "format": "int32"
-          },
-          "category": {
-            "$ref": "#/components/schemas/Category"
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false

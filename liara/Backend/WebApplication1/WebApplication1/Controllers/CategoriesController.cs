@@ -16,11 +16,18 @@ namespace YourNamespace.Controllers
         }
 
         // GET: api/Categories
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        //{
+        //    return await _context.Category.Include(c => c.Products).ToListAsync();
+        //}
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Category.Include(c => c.Products).ToListAsync();
+            return await _context.Category.ToListAsync();
         }
+
 
         // POST: api/Categories
         [HttpPost]

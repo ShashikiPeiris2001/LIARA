@@ -103,19 +103,45 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.UsersController",
-    "Method": "AddUsers",
-    "RelativePath": "api/Users",
+    "Method": "Login",
+    "RelativePath": "api/Users/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "addUsersDto",
-        "Type": "WebApplication1.Models.AddUsersDto",
+        "Name": "loginDto",
+        "Type": "WebApplication1.Models.LoginDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.UsersController",
+    "Method": "PostUser",
+    "RelativePath": "api/Users/register-users",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDetails",
+        "Type": "WebApplication1.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplication1.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "WebApplication1.Controllers.WeatherForecastController",
