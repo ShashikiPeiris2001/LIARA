@@ -1,4 +1,5 @@
 import React from "react";
+import AdminSidebar from "./AdminSidebar";
 
 const AdminDashboard: React.FC = () => {
   const orders = [
@@ -11,37 +12,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="flex">
-      {/* Sidebar */}
-      <aside className="bg-gray-200 w-64 min-h-screen p-4">
-        <h2 className="text-xl font-bold mb-6">Admin</h2>
-        <ul className="space-y-4">
-          <li>
-            <a href="#" className="text-gray-700 hover:text-black">
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-700 hover:text-black">
-              Products
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-700 hover:text-black">
-              Categories
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-700 hover:text-black">
-              Orders
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-700 hover:text-black">
-              Customers
-            </a>
-          </li>
-        </ul>
-      </aside>
+      <AdminSidebar/>
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-100">

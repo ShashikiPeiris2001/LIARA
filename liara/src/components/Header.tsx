@@ -2,6 +2,7 @@ import React from "react";
 import { IoSearch } from "react-icons/io5";
 import { LuShoppingCart } from "react-icons/lu";
 import { IoMdContact } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
@@ -17,8 +18,10 @@ const Header: React.FC = () => {
       {/* Action Icons */}
       <div className="flex space-x-6 text-xl cursor-pointer">
         <IoSearch className="hover:text-gray-500 transition" />
-        <LuShoppingCart className="hover:text-gray-500 transition" />
-        <IoMdContact className="hover:text-gray-500 transition" />
+        <LuShoppingCart className="hover:text-gray-500 transition"  />
+        <Link to="/login">
+          <IoMdContact className="hover:text-gray-500 transition" />
+        </Link>
       </div>
     </header>
   );
