@@ -37,7 +37,7 @@ namespace YourNamespace.Controllers
             await _context.SaveChangesAsync();
 
             // Use CategoryId instead of id
-            return CreatedAtAction(nameof(GetCategories), new { id = category.CategoryId }, category);
+            return CreatedAtAction(nameof(GetCategories), new { id = category.CategoryID }, category);
         }
     }
 }

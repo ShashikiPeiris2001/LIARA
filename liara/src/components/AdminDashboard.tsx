@@ -35,7 +35,7 @@ const AdminDashboard: React.FC = () => {
               <p className="text-2xl">20</p>
             </div>
             <div className="p-4 bg-green-200 rounded-lg shadow-md text-center">
-              <h3 className="text-lg font-bold">Categories</h3>
+              <h3 className="text-lg font-bold">Category</h3>
               <p className="text-2xl">5</p>
             </div>
           </div>

@@ -9,7 +9,7 @@ const AdminDashboard: React.FC = () => {
         <h2 className="text-xl font-bold mb-6">Admin</h2>
         <ul className="space-y-4">
           <li>
-            <Link to="/" className="text-gray-700 hover:text-black">
+            <Link to="/AdminDashboard" className="text-gray-700 hover:text-black">
               Dashboard
             </Link>
           </li>
@@ -19,8 +19,8 @@ const AdminDashboard: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/categories" className="text-gray-700 hover:text-black">
-              Categories
+            <Link to="/Category" className="text-gray-700 hover:text-black">
+              Category
             </Link>
           </li>
           <li>

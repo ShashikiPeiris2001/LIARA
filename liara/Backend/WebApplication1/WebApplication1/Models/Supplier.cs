@@ -5,10 +5,10 @@ namespace WebApplication1.Models
     public class Supplier
     {
         [Key]
-        public int Supplier_Id { get; set; }
-        public string Supplier_Name { get; set; }
-        public string Supplier_Address { get; set; }
-        public int Tel_number { get; set; }
+        public int SupplierID { get; set; }
+        public string SupplierName { get; set; }
+        public string SupplierAddress { get; set; }
+        public int TelNumber { get; set; }
 
     }
 }

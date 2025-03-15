@@ -1,12 +1,537 @@
 {
   "Version": 1,
-  "Hash": "SOwnQaRbYOGhWkmnAJKwdq79srT7hswqSxEp5hi48iY=",
+  "Hash": "WFeW2y4k5VVuqF6PpgrpHjmcvZny6NhHV6AKsITbXi8=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebApplication1\\wwwroot",
+      "Source": "WebApplication1",
+      "ContentRoot": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/1b809f58-b48e-4ea7-b284-06dd6bde6a9e#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7g9vui3fe0",
+      "Integrity": "aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg"
+    },
+    {
+      "Identity": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\343a915d-ff05-4543-8372-93e9ef684574.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/343a915d-ff05-4543-8372-93e9ef684574#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zbk8gw0mfg",
+      "Integrity": "7yj9K5vD7rdgYBt5H9AVyGMOZxV0GcfGBrkP63V4gQ0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\343a915d-ff05-4543-8372-93e9ef684574.png"
+    },
+    {
+      "Identity": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/74af2ca9-4a40-49cd-8f88-ace7b9bef82f#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7g9vui3fe0",
+      "Integrity": "aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg"
+    },
+    {
+      "Identity": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7g9vui3fe0",
+      "Integrity": "aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg"
+    },
+    {
+      "Identity": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/c9314b4a-08ef-4a39-bff3-e62709b438a2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7g9vui3fe0",
+      "Integrity": "aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "images/1b809f58-b48e-4ea7-b284-06dd6bde6a9e.7g9vui3fe0.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Feb 2025 04:41:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7g9vui3fe0"
+        },
+        {
+          "Name": "label",
+          "Value": "images/1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Feb 2025 04:41:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/343a915d-ff05-4543-8372-93e9ef684574.png",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\343a915d-ff05-4543-8372-93e9ef684574.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44936"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7yj9K5vD7rdgYBt5H9AVyGMOZxV0GcfGBrkP63V4gQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Feb 2025 04:43:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7yj9K5vD7rdgYBt5H9AVyGMOZxV0GcfGBrkP63V4gQ0="
+        }
+      ]
+    },
+    {
+      "Route": "images/343a915d-ff05-4543-8372-93e9ef684574.zbk8gw0mfg.png",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\343a915d-ff05-4543-8372-93e9ef684574.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44936"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7yj9K5vD7rdgYBt5H9AVyGMOZxV0GcfGBrkP63V4gQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Feb 2025 04:43:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zbk8gw0mfg"
+        },
+        {
+          "Name": "label",
+          "Value": "images/343a915d-ff05-4543-8372-93e9ef684574.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7yj9K5vD7rdgYBt5H9AVyGMOZxV0GcfGBrkP63V4gQ0="
+        }
+      ]
+    },
+    {
+      "Route": "images/74af2ca9-4a40-49cd-8f88-ace7b9bef82f.7g9vui3fe0.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 09:54:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7g9vui3fe0"
+        },
+        {
+          "Name": "label",
+          "Value": "images/74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 09:54:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.7g9vui3fe0.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 10:23:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7g9vui3fe0"
+        },
+        {
+          "Name": "label",
+          "Value": "images/c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 10:23:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/c9314b4a-08ef-4a39-bff3-e62709b438a2.7g9vui3fe0.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 09:56:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7g9vui3fe0"
+        },
+        {
+          "Name": "label",
+          "Value": "images/c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    },
+    {
+      "Route": "images/c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg",
+      "AssetFile": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120500"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 09:56:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aWjIvfhhlOzLI6SSzblX7rjxNZIJwzOPtWxloVJXI2k="
+        }
+      ]
+    }
+  ]
 }

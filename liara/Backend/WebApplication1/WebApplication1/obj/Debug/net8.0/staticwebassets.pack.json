@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg",
+      "PackagePath": "staticwebassets\\images\\1b809f58-b48e-4ea7-b284-06dd6bde6a9e.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\343a915d-ff05-4543-8372-93e9ef684574.png",
+      "PackagePath": "staticwebassets\\images\\343a915d-ff05-4543-8372-93e9ef684574.png"
+    },
+    {
+      "Id": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg",
+      "PackagePath": "staticwebassets\\images\\74af2ca9-4a40-49cd-8f88-ace7b9bef82f.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg",
+      "PackagePath": "staticwebassets\\images\\c34cd20c-01b9-4fe8-8ccf-0008b4e42c3e.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\LIARA\\liara\\Backend\\WebApplication1\\WebApplication1\\wwwroot\\images\\c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg",
+      "PackagePath": "staticwebassets\\images\\c9314b4a-08ef-4a39-bff3-e62709b438a2.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebApplication1.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebApplication1.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WebApplication1.props",
+      "PackagePath": "build\\WebApplication1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebApplication1.props",
+      "PackagePath": "buildMultiTargeting\\WebApplication1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebApplication1.props",
+      "PackagePath": "buildTransitive\\WebApplication1.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

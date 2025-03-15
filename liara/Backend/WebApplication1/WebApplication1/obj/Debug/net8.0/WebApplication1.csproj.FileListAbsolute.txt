@@ -152,3 +152,12 @@ C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0
 C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\MailKit.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\MimeKit.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Projects\LIARA\liara\Backend\WebApplication1\WebApplication1\bin\Debug\net8.0\WebApplication1.staticwebassets.runtime.json
