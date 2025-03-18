@@ -476,6 +476,23 @@ const [images, setImages] = useState<File[]>([]);
     Kids: ["Girls", "Boys", "Toddlers"],
   };
 
+  // Color Selection handler
+const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { value, checked } = e.target;
+  setSelectedColors(prev => 
+      checked ? [...prev, value] : prev.filter(color => color !== value)
+  );
+};
+
+// Size Selection handler
+const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { value, checked } = e.target;
+  setSelectedSizes(prev =>
+      checked ? [...prev, value] : prev.filter(size => size !== value)
+  );
+};
+
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setImages(Array.from(e.target.files));
@@ -510,6 +527,10 @@ const [images, setImages] = useState<File[]>([]);
     } else {
       formData.append("Colors", "Default"); // Prevent validation error
     }
+
+    // console.log(Colors);
+    // console.log("Selected Colors:", productData.colors);
+
 
     images.forEach((image) => formData.append("Images", image));
 
@@ -586,17 +607,23 @@ const [images, setImages] = useState<File[]>([]);
               </div>
               {/* Color Selection */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">Select Colour:</label>
-                <div className="flex flex-wrap gap-3 mt-2">
-                  {["Blue", "Red", "Pink", "Yellow", "Green", "Black", "White"].map((color) => (
-                    <label key={color} className="inline-flex items-center">
-                      <input type="checkbox" name="color" value={color} 
-                      className="form-checkbox h-4 w-4 text-indigo-600" />
-                      <span className="ml-2">{color}</span>
-                    </label>
-                  ))}
-                </div>
+                  <label className="block text-sm font-medium text-gray-700">Select Colour:</label>
+                  <div className="flex flex-wrap gap-3 mt-2">
+                      {["Blue", "Red", "Pink", "Yellow", "Green", "Black", "White"].map((color) => (
+                          <label key={color} className="inline-flex items-center">
+                              <input
+                                  type="checkbox"
+                                  value={color}
+                                  className="form-checkbox h-4 w-4 text-indigo-600"
+                                  onChange={handleColorChange}
+                              />
+                              <span className="ml-2">{color}</span>
+                          </label>
+                      ))}
+                  </div>
               </div>
+
+
               {/* Price */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">Price:</label>
@@ -610,18 +637,24 @@ const [images, setImages] = useState<File[]>([]);
                 />
               </div>
             </div>
-            {/* Size Chart */}
-            <div className="mt-6">
-              <label className="block text-sm font-medium text-gray-700">Size Chart:</label>
-              <div className="flex items-center gap-4 mt-2">
-                {["S", "M", "L", "XL", "XXL"].map((size) => (
-                  <label key={size} className="inline-flex items-center">
-                    <input type="checkbox" className="form-checkbox h-4 w-4 text-indigo-600" />
-                    <span className="ml-2">{size}</span>
-                  </label>
-                ))}
+           
+              {/* Size Chart */}
+              <div className="mt-6">
+                  <label className="block text-sm font-medium text-gray-700">Size Chart:</label>
+                  <div className="flex items-center gap-4 mt-2">
+                      {["S", "M", "L", "XL", "XXL"].map((size) => (
+                          <label key={size} className="inline-flex items-center">
+                              <input
+                                  type="checkbox"
+                                  value={size}
+                                  className="form-checkbox h-4 w-4 text-indigo-600"
+                                  onChange={handleSizeChange}
+                              />
+                              <span className="ml-2">{size}</span>
+                          </label>
+                      ))}
+                  </div>
               </div>
-            </div>
             {/* Image Upload */}
             <div className="mt-6">
               <label className="block text-sm font-medium text-gray-700">Upload Images:</label>
