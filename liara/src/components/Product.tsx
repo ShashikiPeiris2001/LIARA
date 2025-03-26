@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
-// import { fetchProducts } from "../services/apiService";
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDelete } from "react-icons/md";
@@ -115,22 +114,13 @@ const handleAddProduct = () => {
                   <td className="px-4 py-2 border">{Product.name}</td>
                   <td className="px-4 py-2 border">{Product.category}</td>
                   <td className="px-4 py-2 border">
-                    {/* <span
-                      className={`px-2 py-1 rounded ${
-                        Product.availability === "In"
-                          ? "bg-green-200 text-green-700"
-                          : "bg-orange-200 text-orange-700"
-                      }`}
-                    >
-                      {Product.availability}
-                    </span> */}
                     <select
                       value={Product.availability}
                       onChange={(e) => handleAvailabilityChange(Product.id, e.target.value)}
                       className="px-2 py-1 rounded border focus:outline-none"
                     >
-                      <option value="In" className="bg-lime-400 text-cyan-800">Available</option>
-                      <option value="Out" className="bg-orange-400 text-red-900">Sold Out</option>
+                      <option value="In">Available</option>
+                      <option value="Out">Sold Out</option>
                     </select>
 
                     

@@ -12,16 +12,8 @@ namespace WebApplication1.Models
         public ICollection<Product> Product { get; set; } = new List<Product>();
         // Foreign key to Category
         public int CategoryID { get; set; } // Add this property
-        public Category Category { get; set; }
-        
-        // Forign Key
-        //public int? CategoryID { get; set; }no
+        public Category Category { get; set; } = null!;
 
-        // Navigation Property
-        //[ForeignKey("CategoryID")]
-        //public Category Category { get; set; }
 
-        // Navigation Property
-        //public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

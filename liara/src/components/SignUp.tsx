@@ -7,7 +7,7 @@ const SignUp: React.FC = () => {
     Username: "",
     Email: "",
     PasswordHash: "",
-    UserRole:"customer"
+    Role:"customer"
   });
 
   // Handle input change
@@ -25,9 +25,10 @@ const SignUp: React.FC = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5005/api/Users/register-users`,
+        "http://localhost:5005/api/Users/register-users",
         formData
       );
+      
       console.log(formData);
       alert("User registered successfully");
 
@@ -35,7 +36,7 @@ const SignUp: React.FC = () => {
         Username: "",
         Email: "",
         PasswordHash: "",
-        UserRole: "customer", // Reset to default value
+        Role: "customer", // Reset to default value
       });
       
     } catch (error) {

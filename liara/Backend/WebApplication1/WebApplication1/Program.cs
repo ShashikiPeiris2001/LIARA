@@ -66,7 +66,9 @@ app.MapControllers();
 app.Run();
 */
 
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 
@@ -74,7 +76,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });
+
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -135,6 +142,9 @@ builder.WebHost.UseWebRoot("wwwroot");
 
 
 var app = builder.Build();
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllers();
 
 app.UseCors("AllowAll");
 

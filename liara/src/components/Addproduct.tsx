@@ -451,9 +451,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
-// import { useNavigate } from "react-router-dom";
-// import { Addproduct } from "../services/apiService";
-//import { addProduct } from "../services/apiService";  // Ensure correct path
 
 
 const API_BASE_URL = "http://localhost:5005/api";
@@ -592,6 +589,8 @@ const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   value={stockQuantity}
                   onChange={(event) => setStockQuantity(Number(event.target.value))}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  min="1"
+                  required
                 />
               </div>
               {/* Sub Category */}

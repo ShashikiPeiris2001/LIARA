@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
+import { IoSearch } from "react-icons/io5";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
+import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
 // import { fetchCategories } from "../services/apiService";
 
 const Category: React.FC = () => {
   const navigate = useNavigate();
-  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+  const [categories, setCategories] = useState<{ id: number; name: string}[]>([]);
   const [error, setError] = useState<string>("");
 
-  // useEffect(() => {
-  //   const loadCategories = async () => {
-  //     try {
-  //       const data = await fetchCategories();
-  //       setCategories(data);
-  //     } catch (err) {
-  //       setError("Failed to fetch categories");
-  //     }
-  //   };
-
-  //   loadCategories();
-  // }, []);
-
-  // const handleAddCategory = () => {
-  //   navigate("/AddCategory");
-  // };
+  
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/api/Category"); // Adjust API URL as needed
+        const response = await axios.get("http://localhost:5005/api/Categories"); // Adjust API URL as needed
         setCategories(response.data);
       } catch (err) {
         console.error("Error fetching categories:", err);
@@ -40,7 +29,7 @@ const Category: React.FC = () => {
   }, []);
 
   const handleAddCategory = () => {
-    navigate("/AddCategory");
+    navigate("/Addcategory");
   };
 
   return (
@@ -72,16 +61,24 @@ const Category: React.FC = () => {
                 <tr key={category.id} className="text-gray-700">
                   <td className="px-4 py-2 border">{category.name}</td>
                   <td className="px-4 py-2 border text-center">
-                    <button className="text-lg">➕</button>
+                  <button className="text-lg">
+                     <FaPlus className="hover:text-gray-500 transition" />
+                    </button>
                   </td>
                   <td className="px-4 py-2 border text-center">
-                    <button className="text-lg">🔍</button>
+                    <button className="text-lg">
+                     <IoSearch className="hover:text-gray-500 transition" />
+                    </button>
                   </td>
                   <td className="px-4 py-2 border text-center">
-                    <button className="text-lg">✏️</button>
+                    <button className="text-lg">
+                     <MdOutlineModeEdit className="hover:text-gray-500 transition" />
+                    </button>
                   </td>
                   <td className="px-4 py-2 border text-center">
-                    <button className="text-lg text-red-500">🗑️</button>
+                    <button className="text-lg text-black">
+                      <MdOutlineDelete className="hover:text-gray-500 transition" />
+                    </button>
                   </td>
                 </tr>
               ))}

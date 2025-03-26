@@ -87,12 +87,13 @@ import Product from "./components/Product";
 import Addproduct from "./components/Addproduct";
 import ResetPassword from "./components/ResetPassword";
 import Category from "./components/Category";
+import AddCategory from "./components/Addcategory";
 
 const App: React.FC = () => {
   const location = useLocation();
 
   // Check if the current route is for AdminDashboard or Product (using startsWith for Product to cover nested routes)
-  const isAdminPage = ["/AdminDashboard"].includes(location.pathname) || location.pathname.startsWith("/product") || location.pathname.startsWith("/Addproduct") || location.pathname.startsWith("/Category");
+  const isAdminPage = ["/AdminDashboard"].includes(location.pathname) || location.pathname.startsWith("/product") || location.pathname.startsWith("/Addproduct") || location.pathname.startsWith("/Category") || location.pathname.startsWith("/Addcategory");
   
 
   return (
@@ -121,6 +122,7 @@ const App: React.FC = () => {
         <Route path="/Category" element={<Category />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/Addproduct" element={<Addproduct />} />
+        <Route path="/Addcategory" element={<AddCategory />} />
         
       </Routes>
 
