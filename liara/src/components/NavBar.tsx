@@ -3,8 +3,8 @@ import Header from "./Header";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-gray-800 text-white px-8 py-0.1">
-      <ul className="flex justify-center space-x-14 p-4 text-m">
+    <nav className="bg-gray-800 text-white px-9 py-0.05">
+      <ul className="flex justify-center space-x-14 p-3 text-m">
         <li>
           <a href="/Herosection" className="hover:text-gray-400 transition">
             Home

@@ -88,6 +88,7 @@ import Addproduct from "./components/Addproduct";
 import ResetPassword from "./components/ResetPassword";
 import Category from "./components/Category";
 import AddCategory from "./components/Addcategory";
+import ShopNow from "./components/ShopNow";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -123,6 +124,7 @@ const App: React.FC = () => {
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/Addproduct" element={<Addproduct />} />
         <Route path="/Addcategory" element={<AddCategory />} />
+        <Route path="/ShopNow" element={<ShopNow />} />
         
       </Routes>
 

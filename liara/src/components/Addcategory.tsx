@@ -38,20 +38,20 @@ const AddCategory: React.FC = () => {
     };
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/category/Addcategory`, data, {
+      const response = await axios.post(`${API_BASE_URL}/Categories/Addcategory`, data, {
         headers: { "Content-Type": "application/json" },
       });
 
       if (response.status === 200) {
-        setMessage("Category and subcategories added successfully!");
         setCategoryName("");
         setSubCategories([""]);
+        setMessage("Category and subcategories added successfully!");
       } else {
         setMessage("Failed to add category.");
       }
     } catch (err) {
       console.error("Fetch Error:", err);
-      setMessage("Failed to add category.");
+      setMessage("Failed to add .");
     }
   };
 

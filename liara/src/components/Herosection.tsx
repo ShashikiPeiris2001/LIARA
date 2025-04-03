@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import image1 from "../assets/3frame.jpg";
 import image2 from "../assets/Gigi Hadid American.jpg";
 import image3 from "../assets/beautiful-young-woman.jpg";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import Navbar from "./NavBar";
 import NewArrivals from "./NewArrivals";
@@ -49,7 +50,7 @@ const HeroSection: React.FC = () => {
         <h1 className="text-5xl font-bold mb-4">Discover Your Style</h1>
         <p className="text-lg mb-6">Explore the latest trends with LIARA</p>
         <button className="px-6 py-2 bg-white text-black rounded-xl hover:bg-gray-200 transition">
-          Shop Now
+          <Link to="/ShopNow">Shop Now</Link>
         </button>
       </div>
 

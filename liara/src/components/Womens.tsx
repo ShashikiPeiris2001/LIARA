@@ -212,7 +212,7 @@ const Women: React.FC = () => {
         {/* Product List */}
         <div className="w-4/5 grid grid-cols-3 gap-6 px-6">
         {products.slice(0, showAll ? products.length : 6).map((product) => (
-            <div key={product.ProductID} className="p-4 border rounded-lg shadow-md">
+            <div key={product.ProductID} className="p-4 border rounded-lg shadow-md text-center">
               {product.images?.length > 0 && product.images[0]?.base64Image &&  (
                <img
                src={`data:image/png;base64,${product.images[0].base64Image}`}
@@ -221,7 +221,7 @@ const Women: React.FC = () => {
                onError={(e) => console.error("Image Load Error:", e)}
              />
               )}
-              <h3 className="text-lg font-bold mt-2">{product.name}</h3>
+              <h3 className="text-lg font-medium mt-2">{product.name}</h3>
               <p className="text-gray-700 text-sm">{product.Description}</p>
               <p className="text-black font-bold mt-1">Rs. {product.price}</p>
             </div>

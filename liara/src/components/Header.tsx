@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 
       {/* Action Icons */}
       <div className="flex space-x-6 text-xl cursor-pointer">
-        <IoSearch className="hover:text-gray-500 transition" />
+        {/* <IoSearch className="hover:text-gray-500 transition" /> */}
         <LuShoppingCart className="hover:text-gray-500 transition"  />
         <Link to="/login">
           <IoMdContact className="hover:text-gray-500 transition" />

@@ -8,75 +8,67 @@ import axios from "axios";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState<{ id: number; name: string; price: number; category: string; availability: string }[]>([]);
+  const [products, setProducts] = useState<{ id: number; name: string; price: number; Category: string; availability: string }[]>([]);
   const [error, setError] = useState<string>("");
 
-//   useEffect(() => {
-//     const loadProducts = async () => {
-//       try {
-//         const data = await fetchProducts(); // ✅ Calls the correct function from apiService
-//         console.log("Fetched Products:", data); // Debugging to check data format
-//         setProducts(data); // ✅ Ensures correct type assignment
-//       } catch (err) {
-//         setError("Failed to fetch products");
-//       }
-//     };
 
-//     loadProducts();
-// }, []);
-// Function to fetch products from the backend
-const fetchProducts = async () => {
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:5005/api/Product/GetAllProducts");
+      console.log("API Response:", response.data); // ✅ Verify API data structure
+  
+      const formattedProducts = response.data.map((product: any) => ({
+        id: product.productID,  // ✅ Fix casing (ProductID → productID)
+        name: product.name, // ✅ Fix casing (Name → name)
+        Category: product.categoryName, // ✅ Fix casing (CategoryName → categoryName)
+        availability: product.stock > 0 ? "Available" : "Sold Out", // ✅ Fix Stock condition
+      }));
+  
+      console.log("Formatted Products:", formattedProducts); // ✅ Verify mapping
+      setProducts(formattedProducts);
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      setError("Failed to fetch products. Please try again later.");
+    }
+  };
+  
+  
+
+
+  const handleAvailabilityChange = async (productId: number, newStatus: string) => {
+    try {
+      await fetch(`http://localhost:5005/api/Product/UpdateAvailability/${productId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ availability: newStatus }),
+      });
+  
+      // Update the local state for that specific product
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === productId ? { ...product, availability: newStatus } : product
+        )
+      );
+    } catch (error) {
+      console.error("Error updating availability:", error);
+      setError("Failed to update availability. Please try again.");
+    }
+  };
+  
+const handleDeleteProduct = async (productId: number) => {
+  if (window.confirm("Are you sure you want to delete this Product?")) { 
   try {
-    const response = await axios.get("http://localhost:5005/api/Product/Getproduct");
-    setProducts(response.data);
-  } catch (err) {
-    console.error("Error fetching products:", err);
-    setError("Failed to fetch products. Please try again later.");
-  }
-  // console.log(data)
-};
-
-const handleAvailabilityChange = async (productId: number, newStatus: string) => {
-  try {
-    // Call API to update the availability in the database
-    await fetch(`http://your-api-url/products/${productId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ availability: newStatus }),
-    });
-
-    // Update the local state for that specific product
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === productId ? { ...product, availability: newStatus } : product
-      )
-    );
+    // API call to delete product
+    await axios.delete(`http://localhost:5005/api/Product/DeleteProduct/${productId}`);
+    // Update UI: Remove the product from state
+    setProducts(products.filter((product) => product.id !== productId));
   } catch (error) {
-    console.error("Error updating availability:", error);
+    console.error("Error deleting product:", error);
+    setError("Failed to delete the product. Please try again.");
   }
+}
 };
-
-// useEffect(() => {
-//   const loadProducts = async () => {
-//     try {
-//       const data = await fetchProducts();
-//       console.log("Fetched Products:", data);
-//       setProducts(data);
-//     } catch (err) {
-//       console.error("Error fetching products:", err);
-//       setError("Failed to fetch products");
-//     }
-//   };
-
-//   loadProducts();
-// }, []);
-
-
- 
-
-//   const handleAddProduct = () => {
-//     navigate("/Addproduct");
-//   };
 useEffect(() => {
   fetchProducts();
 }, []);
@@ -100,7 +92,7 @@ const handleAddProduct = () => {
             <thead>
               <tr className="bg-gray-100">
                 <th className="text-left px-4 py-2 border">Product Name</th>
-                <th className="text-left px-4 py-2 border">Category</th>
+                <th className="text-left px-4 py-2 border">Category Name</th>
                 <th className="text-left px-4 py-2 border">Availability</th>
                 <th className="text-center px-4 py-2 border">View</th>
                 <th className="text-center px-4 py-2 border">Edit</th>
@@ -111,8 +103,9 @@ const handleAddProduct = () => {
 
               {products.map((Product) => (
                 <tr key={Product.id} className="text-gray-700">
-                  <td className="px-4 py-2 border">{Product.name}</td>
-                  <td className="px-4 py-2 border">{Product.category}</td>
+                 <td className="px-4 py-2 border">{Product.name || "N/A"}</td>
+                <td className="px-4 py-2 border">{Product.Category || "N/A"}</td>
+
                   <td className="px-4 py-2 border">
                     <select
                       value={Product.availability}
@@ -136,10 +129,11 @@ const handleAddProduct = () => {
                     </button>
                   </td>
                   <td className="px-4 py-2 border text-center">
-                    <button className="text-lg text-black">
-                    <MdOutlineDelete className="hover:text-gray-500 transition" />
+                    <button onClick={() => handleDeleteProduct(Product.id)} className="text-lg text-black">
+                      <MdOutlineDelete className="hover:text-gray-500 transition" />
                     </button>
                   </td>
+
                 </tr>
               ))}
             </tbody>
