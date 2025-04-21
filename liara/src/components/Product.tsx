@@ -8,7 +8,8 @@ import axios from "axios";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState<{ id: number; name: string; price: number; Category: string; availability: string }[]>([]);
+  const [products, setProducts] = useState<{ id: number; name: string; price: number; Category: string; Stock: number;
+    Status: string; }[]>([]);
   const [error, setError] = useState<string>("");
 
 
@@ -22,7 +23,8 @@ const Product: React.FC = () => {
         id: product.productID,  // ✅ Fix casing (ProductID → productID)
         name: product.name, // ✅ Fix casing (Name → name)
         Category: product.categoryName, // ✅ Fix casing (CategoryName → categoryName)
-        availability: product.stock > 0 ? "Available" : "Sold Out", // ✅ Fix Stock condition
+        Stock: product.stock , // ✅ Fix Stock condition
+        Status: product.status,
       }));
   
       console.log("Formatted Products:", formattedProducts); // ✅ Verify mapping
@@ -32,29 +34,18 @@ const Product: React.FC = () => {
       setError("Failed to fetch products. Please try again later.");
     }
   };
-  
-  
-
-
-  const handleAvailabilityChange = async (productId: number, newStatus: string) => {
+  const reduceStock = async (productId: number, quantity: number) => {
     try {
-      await fetch(`http://localhost:5005/api/Product/UpdateAvailability/${productId}`, {
-        method: "PUT",
+      await axios.put(`http://localhost:5005/api/Product/ReduceStock/${productId}`, quantity, {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ availability: newStatus }),
       });
-  
-      // Update the local state for that specific product
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === productId ? { ...product, availability: newStatus } : product
-        )
-      );
+      fetchProducts(); // Refresh products
     } catch (error) {
-      console.error("Error updating availability:", error);
-      setError("Failed to update availability. Please try again.");
+      console.error("Error reducing stock:", error);
     }
   };
+  
+  
   
 const handleDeleteProduct = async (productId: number) => {
   if (window.confirm("Are you sure you want to delete this Product?")) { 
@@ -93,7 +84,8 @@ const handleAddProduct = () => {
               <tr className="bg-gray-100">
                 <th className="text-left px-4 py-2 border">Product Name</th>
                 <th className="text-left px-4 py-2 border">Category Name</th>
-                <th className="text-left px-4 py-2 border">Availability</th>
+                <th className="text-left px-4 py-2 border">Stock</th>
+                <th className="text-left px-4 py-2 border">Status</th>
                 <th className="text-center px-4 py-2 border">View</th>
                 <th className="text-center px-4 py-2 border">Edit</th>
                 <th className="text-center px-4 py-2 border">Delete</th>
@@ -106,17 +98,15 @@ const handleAddProduct = () => {
                  <td className="px-4 py-2 border">{Product.name || "N/A"}</td>
                 <td className="px-4 py-2 border">{Product.Category || "N/A"}</td>
 
+                <td className="px-4 py-2 border">{Product.Stock}</td>
                   <td className="px-4 py-2 border">
-                    <select
-                      value={Product.availability}
-                      onChange={(e) => handleAvailabilityChange(Product.id, e.target.value)}
-                      className="px-2 py-1 rounded border focus:outline-none"
+                    <span
+                      className={`px-2 py-1 rounded-full text-sm font-medium ${
+                        Product.Status === "Sold Out" ? "bg-red-200 text-red-700" : "bg-green-200 text-green-700"
+                      }`}
                     >
-                      <option value="In">Available</option>
-                      <option value="Out">Sold Out</option>
-                    </select>
-
-                    
+                      {Product.Status}
+                    </span>
                   </td>
                   <td className="px-4 py-2 border text-center">
                     <button className="text-lg">

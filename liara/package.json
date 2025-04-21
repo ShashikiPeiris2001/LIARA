@@ -11,17 +11,24 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "axios": "^1.8.1",
+    "axios": "^1.8.4",
+    "formik": "^2.4.6",
+    "framer-motion": "^12.7.4",
     "icons": "^1.0.0",
+    "lucide-react": "^0.487.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
-    "react-router-dom": "^7.1.5"
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.1.5",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/node": "^22.14.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "@types/react-modal": "^3.16.3",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",

@@ -9,7 +9,7 @@ import Navbar from "./NavBar";
 import NewArrivals from "./NewArrivals";
 
 const HeroSection: React.FC = () => {
-  const images = [image1, image2, image3];
+  const images = [image1, image2, image3,];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Automatic image transition every 3 seconds

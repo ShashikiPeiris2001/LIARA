@@ -10,9 +10,9 @@ const Header: React.FC = () => {
       {/* Logo Section */}
       <div className="font-serif text-4xl font-medium">
         LIARA
-        <span className="block text-xs font-normal text-gray-500">
+        {/* <span className="block text-xs font-normal text-gray-500">
           A CLOTHING BRAND
-        </span>
+        </span> */}
       </div>
 
       {/* Action Icons */}
