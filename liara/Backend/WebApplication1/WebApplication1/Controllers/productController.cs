@@ -85,15 +85,10 @@
 //    }
 //}
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using WebApplication1.Models;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System;
+using Newtonsoft.Json;
+using WebApplication1.Models;
+
 
 namespace WebApplication1.Controllers
 {
@@ -164,39 +159,252 @@ namespace WebApplication1.Controllers
         //}
 
 
- 
 
-        [HttpGet ("Getproduct")]
-        public async Task<IActionResult> GetProducts()
+
+        //[HttpGet ("Getproduct")]
+        //public async Task<IActionResult> GetProducts()
+        //{
+        //    var products = await _context.Product
+        //        .Include(p => p.ProductImage) // ✅ Includes images
+        //        .Include(p => p.ProductColor) // ✅ Includes colors
+        //        .Include(p => p.ProductSize) // ✅ Includes size
+        //        .ToListAsync();
+
+        //    var result = products.Select(product => new
+        //    {
+        //        product.ProductID, // ✅ Changed from ID to ProductId (correct property)
+        //        product.Name,
+        //        product.CategoryID, // ✅ Directly using CategoryName as it's a string
+        //        product.SubCategoryID,
+        //        product.Stock,
+        //        product.Price,
+        //        product.Description,
+        //        Color = product.ProductColor.Select(c => c.Color).ToList(),
+        //        Size = product.ProductSize.Select(s => s.Size).ToList(),
+        //        Images = product.ProductImage.Select(img => new
+
+        //        {
+        //            img.ImageID,
+        //            Base64Image = Convert.ToBase64String(img.ImageData)
+        //        })
+        //    });
+
+
+        //    return Ok(result);
+        //}
+
+        [HttpGet("Getproduct")]
+        public async Task<IActionResult> GetProducts([FromQuery] int? categoryId = null)
         {
-            var products = await _context.Product
+            var query = _context.Product
                 .Include(p => p.ProductImage) // ✅ Includes images
                 .Include(p => p.ProductColor) // ✅ Includes colors
                 .Include(p => p.ProductSize) // ✅ Includes size
-                .ToListAsync();
+                .Include(p => p.Category) // ✅ Include the Category table to get the Category Name
+                .AsQueryable();
+
+            // Filter by CategoryID if provided (for example, 'Women' category)
+            if (categoryId.HasValue)
+            {
+                query = query.Where(p => p.CategoryID == categoryId.Value);
+            }
+
+            var products = await query.ToListAsync();
 
             var result = products.Select(product => new
             {
-                product.ProductID, // ✅ Changed from ID to ProductId (correct property)
-                product.Name,
-                product.CategoryID, // ✅ Directly using CategoryName as it's a string
-                product.SubCategoryID,
-                product.Stock,
-                product.Price,
-                product.Description,
+                ProductID = product.ProductID, // ✅ Changed from ID to ProductId (correct property)
+                Name = product.Name,
+                CategoryID = product.CategoryID, // ✅ Directly using CategoryName as it's a string
+                CategoryName = product.Category != null ? product.Category.CategoryName : "Unknown", // ✅ Get category name
+                SubCategoryID = product.SubCategoryID,
+                Stock = product.Stock,
+                Price = product.Price,
+                Description = product.Description,
                 Color = product.ProductColor.Select(c => c.Color).ToList(),
                 Size = product.ProductSize.Select(s => s.Size).ToList(),
                 Images = product.ProductImage.Select(img => new
-                
                 {
                     img.ImageID,
-                    Base64Image = Convert.ToBase64String(img.ImageData)
-                })
-            });
-
+                    Base64Image = img.ImageData != null ? Convert.ToBase64String(img.ImageData) : null
+                }).ToList()
+            }).ToList();
+            Console.WriteLine("Response JSON: " + JsonConvert.SerializeObject(result));
             return Ok(result);
+
         }
 
+        [HttpGet("GetAllProducts")]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            try
+            {
+                var products = await _context.Product
+                    .Include(p => p.ProductImage) // ✅ Includes images
+                    .Include(p => p.ProductColor) // ✅ Includes colors
+                        .ThenInclude(pc => pc.Color) // ✅ Include nested Color
+                    .Include(p => p.ProductSize) // ✅ Includes sizes
+                         .ThenInclude(ps => ps.Size) // ✅ Include nested Size
+                    .Include(p => p.Category) // ✅ Includes the Category table
+                    .ToListAsync();
+
+                if (products == null || products.Count == 0)
+                {
+                    return NotFound("No products found.");
+                }
+
+                var result = products.Select(product => new
+                {
+                    ProductID = product.ProductID,
+                    Name = product.Name ?? "No Name Available",
+                    CategoryID = product.CategoryID,
+                    CategoryName = product.Category?.CategoryName ?? "Uncategorized",
+                    SubCategoryID = product.SubCategoryID,
+                    Stock = product.Stock,
+                    Status = product.Stock == 0 ? "Sold Out" : "Available", // 👈 Update logic here
+                    Price = product.Price ?? 0,
+                    Description = product.Description,
+                    Colors = product.ProductColor.Select(c => new
+                    {
+                        ColorID = c.Color.ColorID,
+                        Name = c.Color.ColorName,
+                        //Hex = c.Color.HexCode // Optional, if you have it
+                    }).ToList(),
+                    Sizes = product.ProductSize.Select(ps => new
+                    {
+                        SizeID = ps.Size.SizeID,
+                        Name = ps.Size.SizeName
+                    }).ToList(),
+                    Images = product.ProductImage.Select(img => new
+                    {
+                        img.ImageID,
+                        Base64Image = img.ImageData != null ? Convert.ToBase64String(img.ImageData) : null
+                    }).ToList()
+                }).ToList();
+
+
+                Console.WriteLine("Response JSON: " + JsonConvert.SerializeObject(result));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in GetAllProducts: " + ex.Message);
+                return StatusCode(500, "An error occurred while fetching products.");
+            }
+        }
+
+        [HttpPut("ReduceStock/{productId}")]
+        public async Task<IActionResult> ReduceStock(int productId, [FromBody] int quantity)
+        {
+            var product = await _context.Product.FindAsync(productId);
+            if (product == null)
+                return NotFound("Product not found.");
+
+            if (product.Stock < quantity)
+                return BadRequest("Not enough stock.");
+
+            product.Stock -= quantity;
+            if (product.Stock == 0)
+                product.Status = "Sold Out";
+
+            // Update fields
+            product.Name = product.Name;
+            product.CategoryID = product.CategoryID;
+            product.SubCategoryID = product.SubCategoryID;
+            product.Stock = product.Stock;
+            product.Price = product.Price;
+            product.Description = product.Description;
+
+            // Update Status based on Stock
+            product.Status = product.Stock > 0 ? "Available" : "Sold Out";
+
+            
+            await _context.SaveChangesAsync();
+            return Ok("Stock updated.");
+        }
+
+
+
+        [HttpGet("GetLatestProducts")]
+        public async Task<IActionResult> GetLatestProducts()
+        {
+            try
+            {
+                var products = await _context.Product
+                    .Include(p => p.ProductImage)
+                    .Include(p => p.ProductColor)
+                    .Include(p => p.ProductSize)
+                    .Include(p => p.Category)
+                    .OrderByDescending(p => p.ProductID) // Get latest added products
+                    .Take(8) // Take only the last 8 products
+                    .ToListAsync();
+
+                if (products == null || products.Count == 0)
+                {
+                    return NotFound("No products found.");
+                }
+
+                var result = products.Select(product => new
+                {
+                    ProductID = product.ProductID,
+                    Name = product.Name ?? "No Name Available",
+                    CategoryID = product.CategoryID,
+                    CategoryName = product.Category != null ? product.Category.CategoryName : "Uncategorized",
+                    SubCategoryID = product.SubCategoryID,
+                    Stock = product.Stock,
+                    Price = product.Price ?? 0,
+                    Description = product.Description,
+                    Colors = product.ProductColor.Select(c => c.Color).ToList(),
+                    Sizes = product.ProductSize.Select(s => s.Size).ToList(),
+                    Images = product.ProductImage.Select(img => new
+                    {
+                        img.ImageID,
+                        Base64Image = img.ImageData != null ? Convert.ToBase64String(img.ImageData) : null
+                    }).ToList()
+                }).ToList();
+
+                Console.WriteLine("Response JSON: " + JsonConvert.SerializeObject(result));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in GetLatestProducts: " + ex.Message);
+                return StatusCode(500, "An error occurred while fetching products.");
+            }
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var product = await _context.Product
+                .Where(p => p.ProductID == id)
+                .Select(p => new
+                {
+                    id = p.ProductID,
+                    name = p.Name,
+                    price = p.Price,
+                    description = p.Description,
+                    colors = p.ProductColor.Select(pc => new
+                    {
+                        colorID = pc.Color.ColorID,
+                        color = pc.Color.ColorName,
+                        //hex = pc.Color.HexCode // Assuming there's a HexCode or similar field
+                    }).ToList(),
+                    images = _context.ProductImage
+                        .Where(img => img.ProductId == id)
+                        .Select(img => Convert.ToBase64String(img.ImageData))
+                        .ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            if (product == null)
+            {
+                return NotFound(new { message = "Product not found" });
+            }
+
+            return Ok(product);
+        }
 
 
         //[HttpPost("Add-product-details")]
@@ -624,99 +832,120 @@ namespace WebApplication1.Controllers
 
         //    return Ok(new { message = "Product added successfully!", ProductID = product.ProductID });
         //}
-
-        [HttpPost("Addproduct")]
-        public async Task<IActionResult> AddProducts([FromForm] ProductDto productDto)
+        [HttpDelete("DeleteProduct/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            if (productDto == null || string.IsNullOrEmpty(productDto.Name) || productDto.Images == null || !productDto.Images.Any() || productDto.Colors == null || !productDto.Colors.Any() || productDto.Sizes == null || !productDto.Sizes.Any())
+            try
             {
-                return BadRequest("Product details, at least one image, color, and size are required.");
-            }
-
-            var category = await _context.Category.FirstOrDefaultAsync(c => c.CategoryName == productDto.CategoryName);
-            if (category == null)
-            {
-                return BadRequest("Invalid Category Name.");
-            }
-
-            var subCategory = await _context.SubCategory.FirstOrDefaultAsync(sc => sc.SubCategoryName == productDto.SubCategoryName && sc.CategoryID == category.CategoryID);
-            if (subCategory == null)
-            {
-                return BadRequest("Invalid SubCategory Name for the given Category.");
-            }
-
-            var colorEntities = await _context.Color
-                .Where(c => productDto.Colors.Select(cn => cn.Trim().ToLower()).Contains(c.ColorName.Trim().ToLower()))
-                .ToListAsync();
-
-            if (colorEntities.Count != productDto.Colors.Count)
-            {
-                return BadRequest("One or more selected colors do not exist in the database.");
-            }
-
-            var sizeEntities = await _context.Size
-                .Where(s => productDto.Sizes.Select(sn => sn.Trim().ToLower()).Contains(s.SizeName.Trim().ToLower()))
-                .ToListAsync();
-
-            if (sizeEntities.Count != productDto.Sizes.Count)
-            {
-                return BadRequest("One or more selected sizes do not exist in the database.");
-            }
-
-            var product = new Product
-            {
-                Name = productDto.Name,
-                CategoryID = category.CategoryID,
-                SubCategoryID = subCategory.SubCategoryID,
-                Stock = productDto.Stock,
-                Price = productDto.Price,
-                Description = productDto.Description,
-            };
-
-            _context.Product.Add(product);
-            await _context.SaveChangesAsync(); // Save product first to get ProductID
-
-            // **Save Colors separately in ProductColor table**
-            var productColors = colorEntities.Select(color => new ProductColor
-            {
-                ProductID = product.ProductID,
-                ColorID = color.ColorID
-            }).ToList();
-
-            _context.ProductColor.AddRange(productColors);
-            await _context.SaveChangesAsync(); // Save colors
-
-            // **Save Sizes separately in ProductSize table**
-            var productSizes = sizeEntities.Select(size => new ProductSize
-            {
-                ProductID = product.ProductID,
-                SizeID = size.SizeID ?? 0
-            }).ToList();
-
-            _context.ProductSize.AddRange(productSizes);
-            await _context.SaveChangesAsync(); // Save sizes
-
-            // **Save Product Images**
-            foreach (var image in productDto.Images)
-            {
-                if (image.Length > 0)
+                var product = await _context.Product.FindAsync(id);
+                if (product == null)
                 {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await image.CopyToAsync(memoryStream);
-                        _context.ProductImage.Add(new ProductImage
-                        {
-                            ProductId = product.ProductID,
-                            ImageData = memoryStream.ToArray()
-                        });
-                    }
+                    return NotFound(new { message = "Product not found" });
                 }
+
+                _context.Product.Remove(product);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Product deleted successfully" });
             }
-
-            await _context.SaveChangesAsync(); // Save images
-
-            return Ok(new { message = "Product added successfully!", ProductID = product.ProductID });
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error deleting product", error = ex.Message });
+            }
         }
+
+
+[HttpPost("Addproduct")]
+public async Task<IActionResult> AddProducts([FromForm] ProductDto productDto)
+{
+    if (productDto == null || string.IsNullOrEmpty(productDto.Name) || productDto.Images == null || !productDto.Images.Any() || productDto.Colors == null || !productDto.Colors.Any() || productDto.Sizes == null || !productDto.Sizes.Any())
+    {
+        return BadRequest("Product details, at least one image, color, and size are required.");
+    }
+
+    var category = await _context.Category.FirstOrDefaultAsync(c => c.CategoryName == productDto.CategoryName);
+    if (category == null)
+    {
+        return BadRequest("Invalid Category Name.");
+    }
+
+    var subCategory = await _context.SubCategory.FirstOrDefaultAsync(sc => sc.SubCategoryName == productDto.SubCategoryName && sc.CategoryID == category.CategoryID);
+    if (subCategory == null)
+    {
+        return BadRequest("Invalid SubCategory Name for the given Category.");
+    }
+
+    var colorEntities = await _context.Color
+        .Where(c => productDto.Colors.Select(cn => cn.Trim().ToLower()).Contains(c.ColorName.Trim().ToLower()))
+        .ToListAsync();
+
+    if (colorEntities.Count != productDto.Colors.Count)
+    {
+        return BadRequest("One or more selected colors do not exist in the database.");
+    }
+
+    var sizeEntities = await _context.Size
+        .Where(s => productDto.Sizes.Select(sn => sn.Trim().ToLower()).Contains(s.SizeName.Trim().ToLower()))
+        .ToListAsync();
+
+    if (sizeEntities.Count != productDto.Sizes.Count)
+    {
+        return BadRequest("One or more selected sizes do not exist in the database.");
+    }
+
+    var product = new Product
+    {
+        Name = productDto.Name,
+        CategoryID = category.CategoryID,
+        SubCategoryID = subCategory.SubCategoryID,
+        Stock = productDto.Stock,
+        Price = productDto.Price,
+        Description = productDto.Description,
+        Status = productDto.Stock > 0 ? "Available" : "Sold Out"
+    };
+
+    _context.Product.Add(product);
+    await _context.SaveChangesAsync(); // Save to get ProductID
+
+    // Save colors
+    var productColors = colorEntities.Select(color => new ProductColor
+    {
+        ProductID = product.ProductID,
+        ColorID = color.ColorID
+    }).ToList();
+    _context.ProductColor.AddRange(productColors);
+
+    // Save sizes
+    var productSizes = sizeEntities.Select(size => new ProductSize
+    {
+        ProductID = product.ProductID,
+        SizeID = size.SizeID ?? 0
+    }).ToList();
+    _context.ProductSize.AddRange(productSizes);
+
+    await _context.SaveChangesAsync(); // Save colors and sizes
+
+    // Save product images
+    foreach (var image in productDto.Images)
+    {
+        if (image.Length > 0)
+        {
+            using var memoryStream = new MemoryStream();
+            await image.CopyToAsync(memoryStream);
+            var productImage = new ProductImage
+            {
+                ProductId = product.ProductID,
+                ImageData = memoryStream.ToArray(), // Store image as byte array
+            };
+            _context.ProductImage.Add(productImage);
+        }
+    }
+
+    await _context.SaveChangesAsync(); // Save images
+
+    return Ok(new { message = "Product added successfully!" });
+}
+
 
 
 
@@ -734,6 +963,11 @@ namespace WebApplication1.Controllers
             public List<string> Sizes { get; set; }
         }
 
+        public class ImageDto
+        {
+            public int? ImageID { get; set; }
+            public string Base64Image { get; set; }
+        }
 
 
 

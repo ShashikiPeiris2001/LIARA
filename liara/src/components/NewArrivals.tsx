@@ -200,13 +200,13 @@ const NewArrivals: React.FC = () => {
                 <img
                   src={`data:image/png;base64,${product.images[0].base64Image}`}
                   alt={product.name}
-                  className="w-full h-60 object-cover rounded-lg"
+                  className="w-[300px] h-[350px] object-cover"
                 />
               ) : (
                 <img
                   src="https://placehold.co/150x150"
                   alt="No Image Available"
-                  className="w-full h-60 object-cover rounded-lg"
+                  className="w-[300px] h-[350px] object-cover"
                 />
               )}
               <h3 className="text-lg font-medium mt-2">{product.name}</h3>

@@ -247,8 +247,16 @@ namespace WebApplication1.Controllers
             }
 
             // Add the user to the database
-            _dbContext.Users.Add(userDetails);
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                _dbContext.Users.Add(userDetails);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, "Database error: " + ex.Message);
+            }
+
 
             // Return the created user (without sensitive information)
             return CreatedAtAction(nameof(PostUser), new { id = userDetails.UserID }, new

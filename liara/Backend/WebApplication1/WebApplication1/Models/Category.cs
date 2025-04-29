@@ -11,9 +11,8 @@ namespace WebApplication1.Models
         
         public ICollection<Product> Product { get; set; } = new List<Product>();
 
-        //// Navigation Property
-        //public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-        //// Navigation Property for SubCategory
-        //public virtual ICollection<SubCategory> SubCategory { get; set; } = new List<SubCategory>();
+        // Add list of SubCategories
+        public ICollection<SubCategory> SubCategory { get; set; } = new List<SubCategory>();
+
     }
 }

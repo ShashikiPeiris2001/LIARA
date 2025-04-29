@@ -21,6 +21,9 @@ namespace WebApplication1.Models
         public int? Stock { get; set; }
         public decimal? Price { get; set; }
         public string? Description { get; set; }
+        public string Status { get; set; }
+
+        public Category Category { get; set; } // ✅ Add this navigation property
         public ICollection<ProductImage> ProductImage { get; set; } = new List<ProductImage>(); // Fix for missing 'ProductImage'
         public ICollection<ProductColor> ProductColor { get; set; } = new List<ProductColor>(); // Fix for missing 'ProductColor'
         public ICollection<ProductSize> ProductSize { get; set; } = new List<ProductSize>(); // Fix for missing 'ProductSize'

@@ -90,6 +90,7 @@ import Category from "./components/Category";
 import AddCategory from "./components/Addcategory";
 import CheckoutForm from "./components/CheckoutForm";
 import ShopNow from "./components/ShopNow";
+import CartPage from "./components/CartPage";
 import Modal from "react-modal";
 
 // Set App Element for Modal (needed for accessibility)
@@ -111,6 +112,7 @@ const App: React.FC = () => {
       {/* Always show the Header */}
       <Header />
 
+
       {/* Conditionally render Navbar and Footer */}
       {!isAdminPage && <Navbar />}
 
@@ -119,6 +121,7 @@ const App: React.FC = () => {
 
       <Routes>
         {/* Define all routes here */}
+        <Route path="/Header" element={<Header />} />
         <Route path="/login" element={<CustomerLogin />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
@@ -134,7 +137,10 @@ const App: React.FC = () => {
         <Route path="/Addproduct" element={<Addproduct />} />
         <Route path="/Addcategory" element={<AddCategory />} />
         <Route path="/ShopNow" element={<ShopNow />} />
-        <Route path="/CheckoutForm" element={<CheckoutForm />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
+        <Route path="/CartPage" element={<CartPage />} />
+       
+
         
       </Routes>
 

@@ -6,11 +6,11 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-3">
+    <nav className="bg-gray-800 text-white px-6 py-1">
       {/* Header Container */}
       <div className="flex justify-between items-center">
         {/* Desktop Menu - Centered */}
-        <ul className="hidden md:flex justify-center flex-1 space-x-10 text-m">
+        <ul className="hidden md:flex justify-center flex-1 space-x-10 text-m font-semibold">
           {["Herosection", "NewArrivals", "Womens", "Mens", "Kids", "Sales", "AboutUs"].map((item) => (
             <li key={item}>
               <Link to={`/${item}`} className="hover:text-gray-400 transition">

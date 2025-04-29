@@ -451,6 +451,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
+import { useNavigate } from "react-router-dom";
 
 
 const API_BASE_URL = "http://localhost:5005/api";
@@ -465,6 +466,7 @@ const [selectedColors, setSelectedColors] = useState<string[]>([]);  // Add this
 const [selectedSizes, setSelectedSizes] = useState<string[]>([]);  // Add this
 const [stockQuantity, setStockQuantity] = useState<number>(0);
 const [images, setImages] = useState<File[]>([]);
+const navigate = useNavigate();
 
   
   const subCategories: { [key: string]: string[] } = {
@@ -538,6 +540,7 @@ const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
       if (response.status === 200) {
         alert("Product added successfully!");
+        navigate("/Product"); 
       } else {
         alert(`Failed to add product: ${response.data.message || "Unknown error"}`);
       }
@@ -670,10 +673,10 @@ const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               )}
             </div>
             {/* Description */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <label className="block text-sm font-medium text-gray-700">Description:</label>
               <textarea rows={3} className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-            </div>
+            </div> */}
             {/* Buttons */}
             <div className="mt-8 flex justify-end gap-4">
               <button type="button" className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md shadow-sm hover:bg-gray-400">Cancel</button>

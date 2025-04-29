@@ -19,10 +19,11 @@ namespace WebApplication1.Models
         public DbSet<ProductImage> ProductImage { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
+        public DbSet<PlaceOrderView> PlaceOrderView { get; set; }
         public DbSet<Review> Review { get; set; }
         public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Color> Color { get; set; }
-        public DbSet<Size> Size { get; set; }   
+        public DbSet<Size> Size { get; set; }
         public DbSet<ProductColor> ProductColor { get; set; }
         public DbSet<ProductSize> ProductSize { get; set; }
         public DbSet<ProductSupplier> ProductSupplier { get; set; }
@@ -30,7 +31,7 @@ namespace WebApplication1.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>()
-       .HasKey(p => p.ProductID);  // Ensure EF knows the correct PK
+                .HasKey(p => p.ProductID);  // Ensure EF knows the correct PK
 
             modelBuilder.Entity<Color>()
                 .HasKey(c => c.ColorID);
@@ -52,28 +53,40 @@ namespace WebApplication1.Models
                 .HasForeignKey(pc => pc.ColorID);
 
             base.OnModelCreating(modelBuilder);
-        
+
             // Define the many-to-many relationship
             modelBuilder.Entity<ProductSize>()
-                .HasKey(pc => new { pc.ProductID, pc.SizeID });  // Composite Key
+                .HasKey(ps => new { ps.ProductID, ps.SizeID });  // Composite Key
 
-            modelBuilder.Entity<ProductSize>()
-                .HasOne(pc => pc.Product)
+            modelBuilder.Entity<ProductSize>() 
+                .HasOne(ps => ps.Product)
                 .WithMany(p => p.ProductSize)
-                .HasForeignKey(pc => pc.ProductID);
+                .HasForeignKey(ps => ps.ProductID);
 
             modelBuilder.Entity<ProductSize>()
-                .HasOne(pc => pc.Size)
-                .WithMany(c => c.ProductSize)
-                .HasForeignKey(pc => pc.SizeID);
+                .HasOne(ps => ps.Size)
+                .WithMany(s => s.ProductSize)
+                .HasForeignKey(ps => ps.SizeID);
 
             base.OnModelCreating(modelBuilder);
-        
+
             modelBuilder.Entity<ProductSupplier>()
                 .HasKey(ps => new { ps.ProductID, ps.SupplierID });
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Product>()
+               .HasOne(p => p.Category) // ✅ One Product has One Category
+               .WithMany(c => c.Product) // ✅ One Category has Many Products
+               .HasForeignKey(p => p.CategoryID); // ✅ Foreign Key
+
+            modelBuilder.Entity<Category>()
+            .HasMany(c => c.SubCategory)
+            .WithOne(s => s.Category)
+            .HasForeignKey(s => s.CategoryID);
+        }
+
         }
 
     }
-}
+    

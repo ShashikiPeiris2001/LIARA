@@ -63,7 +63,7 @@ const ShopNow: React.FC = () => {
           {products.map((product) => (
             <div
               key={product.productID}
-              className="p-4 border rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 cursor-pointer"
+              className="p-4 border rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 cursor-pointer m-3"
               onClick={() => {
                 if (product.productID) {
                   console.log("Product Clicked:", product.productID);
@@ -77,7 +77,7 @@ const ShopNow: React.FC = () => {
                 <img
                   src={`data:image/png;base64,${product.images[0].base64Image}`}
                   alt={product.name}
-                  className="w-full h-60 object-cover rounded-lg"
+                  className="w-[300px] h-[350px] object-cover "
                 />
               )}
 
