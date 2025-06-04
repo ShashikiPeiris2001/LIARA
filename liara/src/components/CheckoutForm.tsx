@@ -1,753 +1,39 @@
-// // import React, { useEffect } from 'react';
-// // import { useFormik } from 'formik';
-// // import axios from 'axios';
-// // import { useLocation, useNavigate } from 'react-router-dom';
-// // import { Phone } from 'lucide-react';
-
-// // interface ProductData {
-// //   id: number;
-// //   name: string;
-// //   price: number;
-// //   color: string;
-// //   size: string;
-// //   quantity: number;
-// //   image: string;
-// // }
-
-// // const CheckoutForm: React.FC = () => {
-// //   const location = useLocation();
-// //   const navigate = useNavigate();
-// //   const product: ProductData = location.state; 
-
-// //   const total = product.price * product.quantity;
-// //   const shippingFee = total < 5000 ? 400 : 0;
-// //   const finalTotal = total + shippingFee;
-
-// //   // Ensure user is logged in before checkout
-// //   useEffect(() => {
-// //     const token = localStorage.getItem('token'); // or your auth context
-// //     if (!token) {
-// //       navigate('/login', { state: { from: '/checkout' } });
-// //     }
-// //   }, [navigate]);
-
-// //   const formik = useFormik({
-// //     initialValues: {
-// //       email: '',
-// //       firstName: '',
-// //       lastName: '',
-// //       Phone: '',
-// //       address: '',
-// //       apartment: '',
-// //       city: '',
-// //       postalCode: '',
-// //     },
-// //     onSubmit: async (values) => {
-// //       const orderPayload = {
-// //         firstName: values.firstName,
-// //         lastName: values.lastName,
-// //         address: values.address,
-// //         city: values.city,
-// //         postalCode: values.postalCode,
-// //         phone: values.Phone,
-// //         email: values.email,
-// //         total: finalTotal,
-// //         cartItems: [
-// //           {
-// //             productId: product.id,
-// //             quantity: product.quantity,
-// //             name: product.name,
-// //             price: product.price,
-// //           },
-// //         ],
-// //       };
-
-// //       try {
-// //         const response = await axios.post('http://localhost:5005/api/Checkout/PlaceOrder', orderPayload, {
-// //           headers: {
-// //             'Content-Type': 'application/json',
-// //             'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token in headers
-// //           },
-// //         });
-
-// //         alert(response.data.message);
-// //       } catch (error: any) {
-// //         alert(error.response?.data || 'Something went wrong');
-// //       }
-// //     },
-// //   });
-
-// //   return (
-// //     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 p-6">
-// //       {/* Left: Contact & Delivery */}
-// //       <form onSubmit={formik.handleSubmit} className="space-y-6">
-// //         <div>
-// //           <h2 className="text-xl font-bold mb-2">Contact</h2>
-// //           <input
-// //             type="email"
-// //             name="email"
-// //             placeholder="Email or mobile phone number"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.email}
-// //             className="w-full border p-2 rounded"
-// //             required
-// //           />
-// //           <label className="flex items-center mt-2">
-// //             <input type="checkbox" className="mr-2" defaultChecked />
-// //             Email me with news and offers
-// //           </label>
-// //         </div>
-
-// //         <div>
-// //           <h2 className="text-xl font-bold mb-2">Delivery</h2>
-// //           <select className="w-full border p-2 rounded mb-3" disabled>
-// //             <option>Sri Lanka</option>
-// //           </select>
-// //           <div className="grid grid-cols-2 gap-4 mb-3">
-// //             <input
-// //               type="text"
-// //               name="firstName"
-// //               placeholder="First name"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.firstName}
-// //               className="border p-2 rounded"
-// //               required
-// //             />
-// //             <input
-// //               type="text"
-// //               name="lastName"
-// //               placeholder="Last name"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.lastName}
-// //               className="border p-2 rounded"
-// //               required
-// //             />
-// //           </div>
-// //           <input
-// //             type="text"
-// //             name="Phone"
-// //             placeholder="Phone"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.Phone}
-// //             className="w-full border p-2 rounded mb-3"
-// //           />
-// //           <input
-// //             type="text"
-// //             name="address"
-// //             placeholder="Address"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.address}
-// //             className="w-full border p-2 rounded mb-3"
-// //             required
-// //           />
-// //           <input
-// //             type="text"
-// //             name="apartment"
-// //             placeholder="Apartment, suite, etc. (optional)"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.apartment}
-// //             className="w-full border p-2 rounded mb-3"
-// //           />
-// //           <div className="grid grid-cols-2 gap-4">
-// //             <input
-// //               type="text"
-// //               name="city"
-// //               placeholder="City"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.city}
-// //               className="border p-2 rounded"
-// //               required
-// //             />
-// //             <input
-// //               type="text"
-// //               name="postalCode"
-// //               placeholder="Postal code"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.postalCode}
-// //               className="border p-2 rounded"
-// //             />
-// //           </div>
-// //         </div>
-
-// //         <button
-// //           type="submit"
-// //           className="mt-6 w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-// //         >
-// //           Place Order
-// //         </button>
-// //       </form>
-
-// //       {/* Right: Order Summary */}
-// //       <div className="border p-4 rounded space-y-4">
-// //         <div className="flex items-center gap-4">
-// //           <img src={product.image} alt={product.name} className="w-16 h-20 object-cover" />
-// //           <div>
-// //             <p className="font-semibold">{product.name}</p>
-// //             <p className="text-sm text-gray-500">{product.size} / {product.color}</p>
-// //           </div>
-// //           <span className="ml-auto font-semibold">Rs {total.toFixed(2)}</span>
-// //         </div>
-
-// //         <div className="flex justify-between text-sm">
-// //           <span>Subtotal</span>
-// //           <span>Rs {total.toFixed(2)}</span>
-// //         </div>
-// //         <div className="flex justify-between text-sm">
-// //           <span>Shipping</span>
-// //           <span className={`font-medium ${shippingFee === 0 ? 'text-green-600' : 'text-gray-700'}`}>
-// //             {shippingFee === 0 ? 'FREE' : `Rs ${shippingFee.toFixed(2)}`}
-// //           </span>
-// //         </div>
-// //         <div className="flex justify-between font-bold text-lg pt-2 border-t">
-// //           <span>Total</span>
-// //           <span>LKR Rs {finalTotal.toFixed(2)}</span>
-// //         </div>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default CheckoutForm;
-// // import React, { useEffect } from "react";
-// // import { useFormik } from "formik";
-// // import axios from "axios";
-// // import { useLocation, useNavigate } from "react-router-dom";
-// // import { CartItem } from "./CartItem";
-// // import { Phone } from "lucide-react";
-
-// // interface CheckoutState {
-// //   cartItems: CartItem[];
-// //   subtotal: number;
-// //   shippingFee: number;
-// //   finalTotal: number;
-// // }
-
-// // const CheckoutForm: React.FC = () => {
-// //   const location = useLocation();
-// //   const navigate = useNavigate();
-// //   const { cartItems, subtotal, shippingFee, finalTotal } =
-// //     (location.state as CheckoutState) || { cartItems: [], subtotal: 0, shippingFee: 0, finalTotal: 0 };
-
-// //   // redirect if not logged in
-// //   useEffect(() => {
-// //     const token = localStorage.getItem("token");
-// //     if (!token) {
-// //       navigate("/login", { state: { from: "/CheckoutForm" } });
-// //     }
-// //   }, [navigate]);
-
-// //   const formik = useFormik({
-// //     initialValues: {
-// //       email: "",
-// //       firstName: "",
-// //       lastName: "",
-// //       Phone: "",
-// //       address: "",
-// //       apartment: "",
-// //       city: "",
-// //       postalCode: "",
-// //     },
-// //     onSubmit: async (values) => {
-// //       const orderPayload = {
-// //         firstName: values.firstName,
-// //         lastName: values.lastName,
-// //         address: values.address,
-// //         city: values.city,
-// //         postalCode: values.postalCode,
-// //         phone: values.Phone,
-// //         email: values.email,
-// //         total: finalTotal,
-// //         cartItems: cartItems.map((i) => ({
-// //           productId: i.ProductID,
-// //           quantity: i.Quantity,
-// //           name: i.Name,
-// //           price: i.Price,
-// //         })),
-// //       };
-
-// //       try {
-// //         const resp = await axios.post(
-// //           "http://localhost:5005/api/Checkout/PlaceOrder",
-// //           orderPayload,
-// //           {
-// //             headers: {
-// //               "Content-Type": "application/json",
-// //               Authorization: `Bearer ${localStorage.getItem("token")}`,
-// //             },
-// //           }
-// //         );
-// //         alert(resp.data.message);
-// //       } catch (err: any) {
-// //         alert(err.response?.data || "Something went wrong");
-// //       }
-// //     },
-// //   });
-
-// //   return (
-// //     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 p-6">
-// //       {/* Left: Form */}
-// //       <form onSubmit={formik.handleSubmit} className="space-y-6">
-// //         {/* Contact */}
-// //         <div>
-// //           <h2 className="text-xl font-bold mb-2">Contact</h2>
-// //           <input
-// //             type="email"
-// //             name="email"
-// //             placeholder="Email or mobile phone number"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.email}
-// //             className="w-full border p-2 rounded"
-// //             required
-// //           />
-// //           <label className="flex items-center mt-2">
-// //             <input type="checkbox" className="mr-2" defaultChecked />
-// //             Email me with news and offers
-// //           </label>
-// //         </div>
-
-// //         {/* Delivery */}
-// //         <div>
-// //           <h2 className="text-xl font-bold mb-2">Delivery</h2>
-// //           <select className="w-full border p-2 rounded mb-3" disabled>
-// //             <option>Sri Lanka</option>
-// //           </select>
-
-// //           <div className="grid grid-cols-2 gap-4 mb-3">
-// //             <input
-// //               type="text"
-// //               name="firstName"
-// //               placeholder="First name"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.firstName}
-// //               className="border p-2 rounded"
-// //               required
-// //             />
-// //             <input
-// //               type="text"
-// //               name="lastName"
-// //               placeholder="Last name"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.lastName}
-// //               className="border p-2 rounded"
-// //               required
-// //             />
-// //           </div>
-
-// //           <input
-// //             type="text"
-// //             name="Phone"
-// //             placeholder="Phone"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.Phone}
-// //             className="w-full border p-2 rounded mb-3"
-// //           />
-
-// //           <input
-// //             type="text"
-// //             name="address"
-// //             placeholder="Address"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.address}
-// //             className="w-full border p-2 rounded mb-3"
-// //             required
-// //           />
-// //           <input
-// //             type="text"
-// //             name="apartment"
-// //             placeholder="Apartment, suite, etc. (optional)"
-// //             onChange={formik.handleChange}
-// //             value={formik.values.apartment}
-// //             className="w-full border p-2 rounded mb-3"
-// //           />
-
-// //           <div className="grid grid-cols-2 gap-4">
-// //             <input
-// //               type="text"
-// //               name="city"
-// //               placeholder="City"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.city}
-// //               className="border p-2 rounded"
-// //               required
-// //             />
-// //             <input
-// //               type="text"
-// //               name="postalCode"
-// //               placeholder="Postal code"
-// //               onChange={formik.handleChange}
-// //               value={formik.values.postalCode}
-// //               className="border p-2 rounded"
-// //             />
-// //           </div>
-// //         </div>
-
-// //         <button
-// //           type="submit"
-// //           className="mt-6 w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-// //         >
-// //           Place Order
-// //         </button>
-// //       </form>
-
-// //       {/* Right: Order Summary */}
-// //       <div className="border p-4 rounded space-y-4">
-// //         {cartItems.map((i) => (
-// //           <div key={i.ProductID} className="flex items-center gap-4">
-// //             <img
-// //               src={i.ImageUrl ?? "/fallback-image.jpg"}
-// //               alt={i.Name}
-// //               className="w-16 h-20 object-cover rounded"
-// //             />
-// //             <div>
-// //               <p className="font-semibold">{i.Name}</p>
-// //               <p className="text-sm text-gray-500">
-// //                 {i.Size} / {i.Color}
-// //               </p>
-// //             </div>
-// //             <span className="ml-auto font-semibold">
-// //               LKR {(i.Price * i.Quantity).toFixed(2)}
-// //             </span>
-// //           </div>
-// //         ))}
-
-// //         <div className="flex justify-between text-sm">
-// //           <span>Subtotal</span>
-// //           <span>LKR {subtotal.toFixed(2)}</span>
-// //         </div>
-// //         <div className="flex justify-between text-sm">
-// //           <span>Shipping</span>
-// //           <span className={shippingFee === 0 ? "text-green-600" : ""}>
-// //             {shippingFee === 0 ? "FREE" : `LKR ${shippingFee.toFixed(2)}`}
-// //           </span>
-// //         </div>
-// //         <div className="flex justify-between font-bold text-lg pt-2 border-t">
-// //           <span>Total</span>
-// //           <span>LKR {finalTotal.toFixed(2)}</span>
-// //         </div>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default CheckoutForm;
-// import React, { useEffect, useState } from "react";
-// import { useFormik } from "formik";
-// import axios from "axios";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { CartItem } from "./CartItem";
-
-// interface CheckoutState {
-//   cartItems: CartItem[];
-//   subtotal: number;
-//   shippingFee: number;
-//   finalTotal: number;
-// }
-
-// const CheckoutForm: React.FC = () => {
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const { cartItems, subtotal, shippingFee, finalTotal } =
-//     (location.state as CheckoutState) || { cartItems: [], subtotal: 0, shippingFee: 0, finalTotal: 0 };
-
-//   const [selectedPayment, setSelectedPayment] = useState("card");
-
-//   useEffect(() => {
-//     const token = localStorage.getItem("token");
-//     if (!token) {
-//       navigate("/login", { state: { from: "/CheckoutForm" } });
-//     }
-//   }, [navigate]);
-
-//   const formik = useFormik({
-//     initialValues: {
-//       email: "",
-//       firstName: "",
-//       lastName: "",
-//       Phone: "",
-//       address: "",
-//       apartment: "",
-//       city: "",
-//       postalCode: "",
-//     },
-//     onSubmit: async (values) => {
-//       const orderPayload = {
-//         firstName: values.firstName,
-//         lastName: values.lastName,
-//         address: values.address,
-//         city: values.city,
-//         postalCode: values.postalCode,
-//         phone: values.Phone,
-//         email: values.email,
-//         paymentMethod: selectedPayment,
-//         total: finalTotal,
-//         cartItems: cartItems.map((i) => ({
-//           productId: i.ProductID,
-//           quantity: i.Quantity,
-//           name: i.Name,
-//           price: i.Price,
-//         })),
-//       };
-
-//       try {
-//         const resp = await axios.post(
-//           "http://localhost:5005/api/Checkout/PlaceOrder",
-//           orderPayload,
-//           {
-//             headers: {
-//               "Content-Type": "application/json",
-//               Authorization: `Bearer ${localStorage.getItem("token")}`,
-//             },
-//           }
-//         );
-//         alert(resp.data.message);
-//       } catch (err: any) {
-//         alert(err.response?.data || "Something went wrong");
-//       }
-//     },
-//   });
-
-//   const paymentOptions = [
-//     {
-//       value: "card",
-//       label: "Pay with Debit or Credit Card",
-//       icons: ["visa@2x", "mastercard@2x"],
-//     },
-//     {
-//       value: "mintpay",
-//       label: "Mintpay | Shop now. Pay later.",
-//       icons: ["visa@2x"],
-//     },
-//     {
-//       value: "payhere",
-//       label: "Bank Card / Bank Account - PayHere",
-//       icons: ["mastercard@2x", "visa@2x"],
-//     },
-//     {
-//       value: "koko",
-//       label: "Koko: Buy Now Pay Later",
-//       icons: ["visa@2x"],
-//     },
-//     {
-//       value: "cod",
-//       label: "Cash on Delivery (COD)",
-//       icons: [],
-//     },
-//   ];
-  
-
-//   return (
-//     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 p-6">
-//       {/* Left Side: Form */}
-//       <form onSubmit={formik.handleSubmit} className="space-y-6">
-//         {/* Contact Info */}
-//         <div>
-//           <h2 className="text-xl font-bold mb-2">Contact</h2>
-//           <input
-//             type="email"
-//             name="email"
-//             placeholder="Email or mobile phone number"
-//             onChange={formik.handleChange}
-//             value={formik.values.email}
-//             className="w-full border p-2 rounded"
-//             required
-//           />
-//           <label className="flex items-center mt-2">
-//             <input type="checkbox" className="mr-2" defaultChecked />
-//             Email me with news and offers
-//           </label>
-//         </div>
-
-//         {/* Delivery Address */}
-//         <div>
-//           <h2 className="text-xl font-bold mb-2">Delivery</h2>
-//           <select className="w-full border p-2 rounded mb-3" disabled>
-//             <option>Sri Lanka</option>
-//           </select>
-//           <div className="grid grid-cols-2 gap-4 mb-3">
-//             <input
-//               type="text"
-//               name="firstName"
-//               placeholder="First name"
-//               onChange={formik.handleChange}
-//               value={formik.values.firstName}
-//               className="border p-2 rounded"
-//               required
-//             />
-//             <input
-//               type="text"
-//               name="lastName"
-//               placeholder="Last name"
-//               onChange={formik.handleChange}
-//               value={formik.values.lastName}
-//               className="border p-2 rounded"
-//               required
-//             />
-//           </div>
-//           <input
-//             type="text"
-//             name="Phone"
-//             placeholder="Phone"
-//             onChange={formik.handleChange}
-//             value={formik.values.Phone}
-//             className="w-full border p-2 rounded mb-3"
-//           />
-//           <input
-//             type="text"
-//             name="address"
-//             placeholder="Address"
-//             onChange={formik.handleChange}
-//             value={formik.values.address}
-//             className="w-full border p-2 rounded mb-3"
-//             required
-//           />
-//           <input
-//             type="text"
-//             name="apartment"
-//             placeholder="Apartment, suite, etc. (optional)"
-//             onChange={formik.handleChange}
-//             value={formik.values.apartment}
-//             className="w-full border p-2 rounded mb-3"
-//           />
-//           <div className="grid grid-cols-2 gap-4">
-//             <input
-//               type="text"
-//               name="city"
-//               placeholder="City"
-//               onChange={formik.handleChange}
-//               value={formik.values.city}
-//               className="border p-2 rounded"
-//               required
-//             />
-//             <input
-//               type="text"
-//               name="postalCode"
-//               placeholder="Postal code"
-//               onChange={formik.handleChange}
-//               value={formik.values.postalCode}
-//               className="border p-2 rounded"
-//             />
-//           </div>
-//         </div>
-
-//         {/* Payment Section */}
-//         <div>
-//           <h2 className="text-xl font-bold mb-2">Payment</h2>
-//           <p className="text-sm text-gray-500 mb-2">All transactions are secure and encrypted.</p>
-//           <div className="space-y-3">
-//             {paymentOptions.map((opt) => (
-//               <label
-//                 key={opt.value}
-//                 className={`flex items-center p-3 border rounded cursor-pointer justify-between ${
-//                   selectedPayment === opt.value ? "border-black" : "border-gray-300"
-//                 }`}
-//               >
-//                 <input
-//                   type="radio"
-//                   name="paymentMethod"
-//                   value={opt.value}
-//                   checked={selectedPayment === opt.value}
-//                   onChange={() => setSelectedPayment(opt.value)}
-//                   className="mr-3"
-//                 />
-//                 <span className="flex-1">{opt.label}</span>
-//                 {opt.icons.length > 0 && (
-//                   <div className="flex gap-1">
-//                     {opt.icons.map((icon, index) => (
-//                       <img
-//                         key={index}
-//                         src={`/icons/${icon}.png`}
-//                         alt={icon}
-//                         className="h-5 w-8 object-contain"
-//                       />
-//                     ))}
-//                   </div>
-//                 )}
-//               </label>
-//             ))}
-//           </div>
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="mt-6 w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-//         >
-//           Pay now
-//         </button>
-//       </form>
-
-//       {/* Right Side: Order Summary */}
-//       <div className="border p-4 rounded space-y-4">
-//         {cartItems.map((i) => (
-//           <div key={i.ProductID} className="flex items-center gap-4">
-//             <img
-//               src={i.ImageUrl ?? "/fallback-image.jpg"}
-//               alt={i.Name}
-//               className="w-16 h-20 object-cover rounded"
-//             />
-//             <div>
-//               <p className="font-semibold">{i.Name}</p>
-//               <p className="text-sm text-gray-500">
-//                 {i.Size} / {i.Color}
-//               </p>
-//             </div>
-//             <span className="ml-auto font-semibold">
-//               LKR {(i.Price * i.Quantity).toFixed(2)}
-//             </span>
-//           </div>
-//         ))}
-
-//         <div className="flex justify-between text-sm">
-//           <span>Subtotal</span>
-//           <span>LKR {subtotal.toFixed(2)}</span>
-//         </div>
-//         <div className="flex justify-between text-sm">
-//           <span>Shipping</span>
-//           <span className={shippingFee === 0 ? "text-green-600" : ""}>
-//             {shippingFee === 0 ? "FREE" : `LKR ${shippingFee.toFixed(2)}`}
-//           </span>
-//         </div>
-//         <div className="flex justify-between font-bold text-lg pt-2 border-t">
-//           <span>Total</span>
-//           <span>LKR {finalTotal.toFixed(2)}</span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CheckoutForm;
-
 import React, { useEffect, useState } from "react";
+import PhoneInput from "react-phone-input-2";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CartItem } from "./CartItem";
+import { send } from "@emailjs/browser";
+import { CartItem, clearCart } from "./CartItem";
+import "react-phone-input-2/lib/style.css";
 
 interface CheckoutState {
   cartItems: CartItem[];
   subtotal: number;
-  shippingFee: number;
-  finalTotal: number;
 }
 
 const CheckoutForm: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { cartItems, subtotal, shippingFee, finalTotal } =
+  const { cartItems, subtotal } =
     (location.state as CheckoutState) || {
       cartItems: [],
       subtotal: 0,
-      shippingFee: 0,
-      finalTotal: 0,
     };
 
+  // compute shipping & total locally
+  const shippingFee = subtotal < 5000 ? 400 : 0;
+  const finalTotal = subtotal + shippingFee;
+
   const [selectedPayment, setSelectedPayment] = useState("card");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailOffers, setEmailOffers] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login", { state: { from: "/CheckoutForm" } });
-      window.scrollTo(0, 0);
     }
   }, [navigate]);
 
@@ -756,43 +42,51 @@ const CheckoutForm: React.FC = () => {
       email: "",
       firstName: "",
       lastName: "",
-      Phone: "",
+      phone: "",
       address: "",
       apartment: "",
       city: "",
       postalCode: "",
-      subscribe: true,
+      country: "Sri Lanka",
     },
-    validate: (values) => {
-      const errors: { [key: string]: string } = {};
-      if (!values.email) errors.email = "Email is required";
-      if (!values.firstName) errors.firstName = "First name is required";
-      if (!values.lastName) errors.lastName = "Last name is required";
-      if (!values.address) errors.address = "Address is required";
-      if (!values.city) errors.city = "City is required";
-      return errors;
-    },
-    onSubmit: async (values, { setSubmitting }) => {
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid email").required("Required"),
+      firstName: Yup.string().required("Required"),
+      lastName: Yup.string().required("Required"),
+      phone: Yup.string()
+        .required("Required")
+        .matches(/^\+[0-9]{7,15}$/, "Enter a valid international number"),
+      address: Yup.string().required("Required"),
+      city: Yup.string().required("Required"),
+      postalCode: Yup.string().required("Required"),
+      country: Yup.string().required("Required"),
+    }),
+    onSubmit: async (values) => {
+      setIsSubmitting(true);
+
       const orderPayload = {
         firstName: values.firstName,
         lastName: values.lastName,
         address: values.address,
         city: values.city,
         postalCode: values.postalCode,
-        phone: values.Phone,
+        country: values.country,
+        phone: values.phone,
         email: values.email,
         paymentMethod: selectedPayment,
-        Totalprice: finalTotal,
-        cartItems: cartItems.map((i) => ({
-          productId: i.ProductID,
-          quantity: i.Quantity,
-          name: i.Name,
-          price: i.Price,
+        shippingFee,
+        total: finalTotal,
+        cartItems: cartItems.map((item) => ({
+          productId: item.ProductID,
+          quantity: item.Quantity,
+          name: item.Name,
+          price: item.Price,
         })),
       };
 
       try {
-        const resp = await axios.post(
+        // 1. Send the order to your backend
+        const { data } = await axios.post(
           "http://localhost:5005/api/Checkout/PlaceOrder",
           orderPayload,
           {
@@ -802,12 +96,33 @@ const CheckoutForm: React.FC = () => {
             },
           }
         );
-        alert(resp.data.message);
-        navigate("/thank-you");
+        alert(data.message);
+
+        // 2. Send confirmation email
+        await send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
+          {
+            to_email: values.email,
+            to_name: `${values.firstName} ${values.lastName}`,
+            order_id: data.orderId,
+            order_date: new Date().toLocaleDateString(),
+            order_total: finalTotal.toFixed(2),
+          }
+        );
+        alert("Confirmation email sent!");
+
+        // ─── CLEAR THE CART ───────────────────────────────────────────────────
+        clearCart();
+        // ────────────────────────────────────────────────────────────────────────
+
+        // 3. Redirect to home (or order-success) page
+        navigate("/Home", { state: { orderId: data.orderId } });
       } catch (err: any) {
+        console.error(err);
         alert(err.response?.data || "Something went wrong");
       } finally {
-        setSubmitting(false);
+        setIsSubmitting(false);
       }
     },
   });
@@ -815,225 +130,264 @@ const CheckoutForm: React.FC = () => {
   const paymentOptions = [
     {
       value: "card",
-      label: "Pay with Debit or Credit Card",
+      label: "Debit/Credit Card",
       icons: ["visa@2x", "mastercard@2x"],
     },
-    {
-      value: "mintpay",
-      label: "Mintpay | Shop now. Pay later.",
-      icons: ["visa@2x"],
-    },
+    { value: "mintpay", label: "Mintpay (BNPL)", icons: ["visa@2x"] },
     {
       value: "payhere",
-      label: "Bank Card / Bank Account - PayHere",
-      icons: ["mastercard@2x", "visa@2x"],
+      label: "PayHere",
+      icons: ["visa@2x", "mastercard@2x"],
     },
-    {
-      value: "koko",
-      label: "Koko: Buy Now Pay Later",
-      icons: ["visa@2x"],
-    },
-    {
-      value: "cod",
-      label: "Cash on Delivery (COD)",
-      icons: [],
-    },
+    { value: "koko", label: "Koko (BNPL)", icons: ["visa@2x"] },
+    { value: "cod", label: "Cash on Delivery", icons: [] },
   ];
 
   return (
-    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 p-6">
-      {/* Left Side: Form */}
-      <form onSubmit={formik.handleSubmit} className="space-y-6">
-        {/* Contact Info */}
-        <div>
-          <h2 className="text-xl font-bold mb-2">Contact</h2>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email or mobile phone number"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            className="w-full border p-2 rounded"
-            required
-          />
-          <label className="flex items-center mt-2 text-sm">
-            <input
-              type="checkbox"
-              name="subscribe"
-              checked={formik.values.subscribe}
-              onChange={formik.handleChange}
-              className="mr-2"
-            />
-            Email me with news and offers
-          </label>
-        </div>
-
-        {/* Delivery Address */}
-        <div>
-          <h2 className="text-xl font-bold mb-2">Delivery</h2>
-          <select className="w-full border p-2 rounded mb-3" disabled>
-            <option>Sri Lanka</option>
-          </select>
-          <div className="grid grid-cols-2 gap-4 mb-3">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First name"
-              onChange={formik.handleChange}
-              value={formik.values.firstName}
-              className="border p-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last name"
-              onChange={formik.handleChange}
-              value={formik.values.lastName}
-              className="border p-2 rounded"
-              required
-            />
-          </div>
-          <input
-            type="tel"
-            name="Phone"
-            placeholder="Phone"
-            onChange={formik.handleChange}
-            value={formik.values.Phone}
-            className="w-full border p-2 rounded mb-3"
-          />
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            onChange={formik.handleChange}
-            value={formik.values.address}
-            className="w-full border p-2 rounded mb-3"
-            required
-          />
-          <input
-            type="text"
-            name="apartment"
-            placeholder="Apartment, suite, etc. (optional)"
-            onChange={formik.handleChange}
-            value={formik.values.apartment}
-            className="w-full border p-2 rounded mb-3"
-          />
-          <div className="grid grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              onChange={formik.handleChange}
-              value={formik.values.city}
-              className="border p-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="postalCode"
-              placeholder="Postal code"
-              onChange={formik.handleChange}
-              value={formik.values.postalCode}
-              className="border p-2 rounded"
-            />
+    <div className="bg-gray-50 min-h-screen">
+      {/* Page Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900"></h1>
+              <p className="mt-2 text-sm text-gray-600">
+              </p>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Payment Section */}
-        <div>
-          <h2 className="text-xl font-bold mb-2">Payment</h2>
-          <p className="text-sm text-gray-500 mb-2">
-            All transactions are secure and encrypted.
-          </p>
-          <div className="space-y-3">
+      <main className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 p-6">
+        {/* ---- FORM ---- */}
+        <form onSubmit={formik.handleSubmit} className="space-y-6">
+          {/* Contact */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="font-semibold text-lg mb-4">Contact</h2>
+            <Input label="Email" name="email" type="email" formik={formik} />
+            <div className="flex items-center mt-2">
+              <input
+                id="offers"
+                type="checkbox"
+                checked={emailOffers}
+                onChange={() => setEmailOffers(!emailOffers)}
+                className="h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500"
+              />
+              <label
+                htmlFor="offers"
+                className="ml-2 text-sm text-gray-700 select-none"
+              >
+                Email me with news and offers
+              </label>
+            </div>
+          </div>
+
+          {/* Delivery */}
+          <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+            <h2 className="font-semibold text-lg">Delivery</h2>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Country / Region
+              </label>
+              <select
+                name="country"
+                value={formik.values.country}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="w-full border border-gray-300 rounded-lg p-2 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option>Sri Lanka</option>
+                <option>India</option>
+                <option>USA</option>
+                <option>UK</option>
+              </select>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <Input label="First name" name="firstName" formik={formik} />
+              <Input label="Last name" name="lastName" formik={formik} />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Phone</label>
+              <PhoneInput
+                country={"lk"}
+                value={formik.values.phone}
+                onChange={(p) => formik.setFieldValue("phone", "+" + p)}
+                onBlur={() => formik.setFieldTouched("phone", true)}
+                enableSearch
+                inputClass="w-full border-gray-300 rounded-lg p-2 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                containerClass="w-full"
+              />
+              {formik.touched.phone && formik.errors.phone && (
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.phone}
+                </div>
+              )}
+            </div>
+
+            <Input label="Address" name="address" formik={formik} />
+            <Input
+              label="Apartment, suite, etc. (optional)"
+              name="apartment"
+              formik={formik}
+            />
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <Input label="City" name="city" formik={formik} />
+              <Input label="Postal code" name="postalCode" formik={formik} />
+            </div>
+          </div>
+
+          {/* Payment */}
+          <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+            <h2 className="font-semibold text-lg">Payment</h2>
             {paymentOptions.map((opt) => (
               <label
                 key={opt.value}
-                className={`flex items-center p-3 border rounded cursor-pointer justify-between ${
+                className={`flex justify-between items-center p-4 rounded-lg border transition hover:shadow-sm ${
                   selectedPayment === opt.value
-                    ? "border-black"
+                    ? "border-indigo-600 bg-indigo-50"
                     : "border-gray-300"
                 }`}
               >
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value={opt.value}
-                  checked={selectedPayment === opt.value}
-                  onChange={() => setSelectedPayment(opt.value)}
-                  className="mr-3"
-                />
-                <span className="flex-1">{opt.label}</span>
-                {opt.icons.length > 0 && (
-                  <div className="flex gap-1">
-                    {opt.icons.map((icon, index) => (
-                      <img
-                        key={index}
-                        src={`/icons/${icon}.png`}
-                        alt={icon}
-                        className="h-5 w-8 object-contain"
-                      />
-                    ))}
-                  </div>
-                )}
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value={opt.value}
+                    checked={selectedPayment === opt.value}
+                    onChange={() => setSelectedPayment(opt.value)}
+                    className="form-radio text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <span className="select-none">{opt.label}</span>
+                </div>
+                <div className="flex space-x-1">
+                  {opt.icons.map((ic) => (
+                    <img
+                      key={ic}
+                      src={`/icons/${ic}.png`}
+                      alt={ic}
+                      className="h-5"
+                    />
+                  ))}
+                </div>
               </label>
             ))}
           </div>
-        </div>
 
-        <button
-          type="submit"
-          disabled={formik.isSubmitting}
-          className={`mt-6 w-full bg-black text-white py-2 rounded ${
-            formik.isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-800"
-          }`}
-        >
-          {formik.isSubmitting ? "Processing..." : "Pay now"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-indigo-800 text-white py-3 rounded-lg text-center font-medium transition hover:bg-indigo-700 disabled:opacity-50"
+          >
+            {isSubmitting ? "Processing..." : "Place order"}
+          </button>
+        </form>
 
-      {/* Right Side: Order Summary */}
-      <div className="border p-4 rounded space-y-4">
-        {cartItems.map((i) => (
-          <div key={i.ProductID} className="flex items-center gap-4">
-            <img
-              src={i.ImageUrl || "/fallback-image.jpg"}
-              alt={i.Name}
-              className="w-16 h-20 object-cover rounded"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "/fallback-image.jpg";
-              }}
-            />
-            <div>
-              <p className="font-semibold">{i.Name}</p>
-              <p className="text-sm text-gray-500">
-                {i.Size} / {i.Color}
-              </p>
+        {/* ---- SUMMARY ---- */}
+       <aside className="bg-white p-6 rounded-lg shadow-md space-y-4">
+          <h2 className="font-semibold text-lg">Order summary</h2>
+          {cartItems.map((item) => (
+            <div key={item.ProductID} className="flex items-center space-x-4">
+              <div className="relative">
+                <img
+                  src={
+                    item.ImageUrl?.startsWith("data:")
+                      ? item.ImageUrl
+                      : `data:image/jpeg;base64,${item.ImageUrl}`
+                  }
+                  alt={item.Name}
+                  className="w-16 h-20 object-cover rounded-lg transition hover:scale-105"
+                />
+                <span className="absolute -top-1 -left-1 bg-gray-900 text-white text-xs font-bold px-1 rounded">
+                  {item.Quantity}
+                </span>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium">{item.Name}</p>
+                <p className="text-sm text-gray-500">
+                  {item.Size} / {item.Color}
+                </p>
+              </div>
+              <div className="font-semibold">
+                LKR{" "}
+                {(item.Price * item.Quantity).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </div>
             </div>
-            <span className="ml-auto font-semibold">
-              LKR {(i.Price * i.Quantity).toFixed(2)}
-            </span>
-          </div>
-        ))}
+          ))}
 
-        <div className="flex justify-between text-sm">
-          <span>Subtotal</span>
-          <span>LKR {subtotal.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between text-sm">
-          <span>Shipping</span>
-          <span className={shippingFee === 0 ? "text-green-600" : ""}>
-            {shippingFee === 0 ? "FREE" : `LKR ${shippingFee.toFixed(2)}`}
-          </span>
-        </div>
-        <div className="flex justify-between font-bold text-lg pt-2 border-t">
-          <span>Total</span>
-          <span>LKR {finalTotal.toFixed(2)}</span>
-        </div>
-      </div>
+          <div className="border-t pt-4 space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span>Subtotal</span>
+              <span>
+                LKR{" "}
+                {subtotal.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span>Shipping</span>
+              {shippingFee > 0 ? (
+                <span>
+                  LKR{" "}
+                  {shippingFee.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
+              ) : (
+                <span className="text-green-600 font-medium">FREE</span>
+              )}
+            </div>
+            <div className="flex justify-between text-base font-semibold">
+              <span>Total</span>
+              <span>
+                LKR{" "}
+                {finalTotal.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </span>
+            </div>
+          </div>
+        </aside>
+
+      </main>
     </div>
   );
 };
+
+type InputProps = {
+  label: string;
+  name: string;
+  type?: string;
+  formik: any;
+};
+const Input: React.FC<InputProps> = ({ label, name, type = "text", formik }) => (
+  <div>
+    <label className="block text-sm font-medium mb-1" htmlFor={name}>
+      {label}
+    </label>
+    <input
+      id={name}
+      name={name}
+      type={type}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values[name]}
+      placeholder={label}
+      className="w-full border border-gray-300 rounded-lg p-2 transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+    />
+    {formik.touched[name] && formik.errors[name] && (
+      <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>
+    )}
+  </div>
+);
 
 export default CheckoutForm;
