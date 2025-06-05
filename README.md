@@ -29,7 +29,18 @@ LIARA is a modern, full-featured e-commerce web application tailored for a fashi
 
 ## 📸 Screenshots
 
-![Home Page](images/Home-page.png)
+![Image](https://github.com/user-attachments/assets/cfdbeec2-d767-4e78-a7d9-af63768edaa4)
+![Image](https://github.com/user-attachments/assets/e3d8c1e1-f658-4d60-9f4c-22dc195231a1)
+![Image](https://github.com/user-attachments/assets/80aea404-f330-4bb7-8fcb-253efcd20c64)
+![Image](https://github.com/user-attachments/assets/aff2cf32-8eb0-4bee-8ea3-8aba685acbe8)
+![Image](https://github.com/user-attachments/assets/d20a3596-3cda-4072-93f4-587363757342)
+![Image](https://github.com/user-attachments/assets/f670e761-070d-431f-9be3-451743f6ead7)
+![Image](https://github.com/user-attachments/assets/464d7da9-89e9-4e5f-97c2-c0ce6c853a1c)
+![Image](https://github.com/user-attachments/assets/89bcf6fe-4190-4c7a-b89a-dc8284da731d)
+![Image](https://github.com/user-attachments/assets/f2b03463-77e8-4720-9275-5fd15d97781c)
+![Image](https://github.com/user-attachments/assets/7680fc8c-742c-4ab3-b942-d47779577481)
+
+
 
 ## 📁 Project Structure
 
